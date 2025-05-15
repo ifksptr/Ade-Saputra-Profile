@@ -1,0 +1,529 @@
+<html lang="en">
+ <head>
+  <meta charset="utf-8" />
+  <meta content="width=device-width, initial-scale=1" name="viewport" />
+  <title>
+   Ade Saputra Profile
+  </title>
+  <script src="https://cdn.tailwindcss.com"></script>
+  <link
+   href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/5.15.3/css/all.min.css"
+   rel="stylesheet"
+  />
+  <style>
+   @import url("https://fonts.googleapis.com/css2?family=Inter:wght@400;700&display=swap");
+   html,
+   body {
+    height: 100%;
+    margin: 0;
+    font-family: "Inter", sans-serif;
+    background-color: #000000;
+    overflow: hidden;
+   }
+   body {
+    display: flex;
+    flex-direction: column;
+   }
+   #backgroundPattern {
+    position: fixed;
+    top: 0;
+    left: 0;
+    width: 100vw;
+    height: 100vh;
+    pointer-events: none;
+    z-index: 0;
+    overflow: visible;
+   }
+   .fade-in-up {
+    animation: fadeInUp 0.3s ease forwards;
+   }
+   @keyframes fadeInUp {
+    from {
+     opacity: 0;
+     transform: translateY(10px);
+    }
+    to {
+     opacity: 1;
+     transform: translateY(0);
+    }
+   }
+   ul.custom-bullet {
+    list-style-type: none;
+    padding-left: 1rem;
+   }
+   ul.custom-bullet > li::before {
+    content: "➢";
+    color: #8dbf4a;
+    display: inline-block;
+    width: 1em;
+    margin-left: -1em;
+   }
+   .pattern-line {
+    stroke: #1f2937;
+    stroke-width: 1;
+    opacity: 0.15;
+   }
+   .symbol {
+    fill: #2a7f62;
+    opacity: 0.12;
+    transition: opacity 0.3s ease;
+   }
+   .symbol:hover {
+    opacity: 0.3;
+   }
+   #content {
+    position: relative;
+    z-index: 10;
+    flex: 1 1 auto;
+    overflow-y: auto;
+    max-height: 100vh;
+    padding: 1.5rem 1rem;
+    max-width: 80rem;
+    margin-left: 3rem;
+    margin-right: 1rem;
+  }
+  /* Scrollbar styling for better UX */
+  #content::-webkit-scrollbar {
+    width: 8px;
+  }
+  #content::-webkit-scrollbar-track {
+    background: #111827;
+  }
+  #content::-webkit-scrollbar-thumb {
+    background-color: #8dbf4a;
+    border-radius: 4px;
+  }
+  </style>
+  <script>
+   function toggleBoth(textId, imageId, header) {
+    const allTextEls = document.querySelectorAll("[id$='Text']");
+    const allImageEls = document.querySelectorAll("[id$='Image']");
+    const allHeaders = document.querySelectorAll("h2");
+
+    const textEl = document.getElementById(textId);
+    const imageEl = document.getElementById(imageId);
+    const headerEl = header;
+
+    const isCurrentlyVisible = textEl.style.display === "block";
+
+    // Close all
+    allTextEls.forEach((el) => {
+     el.style.display = "none";
+     el.classList.remove("fade-in-up");
+    });
+    allImageEls.forEach((el) => (el.style.display = "none"));
+    allHeaders.forEach((h) => {
+     h.innerHTML = h.innerHTML.replace("−", "+");
+    });
+
+    if (!isCurrentlyVisible) {
+     textEl.style.display = "block";
+     imageEl.style.display = "block";
+     textEl.classList.remove("fade-in-up");
+     void textEl.offsetWidth;
+     textEl.classList.add("fade-in-up");
+     headerEl.innerHTML = headerEl.innerHTML.replace("+", "−");
+    }
+    adjustLayout();
+   }
+
+   function adjustLayout() {
+    const container = document.getElementById("container");
+    const sections = Array.from(container.querySelectorAll("section"));
+
+    // Sort sections by priority order
+    const priorityOrder = [
+     "tentangSayaText",
+     "pendidikanText",
+     "pengalamanKerjaText",
+     "keahlianText",
+     "projectText",
+     "keahlianLainText",
+    ];
+
+    sections.sort((a, b) => {
+     const aText = a.querySelector("div[id$='Text']");
+     const bText = b.querySelector("div[id$='Text']");
+     const aIndex = aText ? priorityOrder.indexOf(aText.id) : priorityOrder.length;
+     const bIndex = bText ? priorityOrder.indexOf(bText.id) : priorityOrder.length;
+     return aIndex - bIndex;
+    });
+
+    // Clear container and re-append sorted sections
+    container.innerHTML = "";
+    sections.forEach((section) => container.appendChild(section));
+
+    const visibleSections = sections.filter((section) => {
+     const text = section.querySelector("div[id$='Text']");
+     return text && text.style.display === "block";
+    });
+
+    // Jika tidak ada yang terbuka → default 2 kolom dengan pembagian manual
+    if (visibleSections.length === 0) {
+     container.innerHTML = `
+          <div id="leftColumn" class="space-y-6 w-full md:w-1/2 pr-3"></div>
+          <div id="rightColumn" class="space-y-6 w-full md:w-1/2 pl-3"></div>
+        `;
+     const leftColumn = document.getElementById("leftColumn");
+     const rightColumn = document.getElementById("rightColumn");
+
+     // Tentang Saya, Pendidikan, Pengalaman Kerja di kiri
+     const leftIds = ["tentangSayaText", "pendidikanText", "pengalamanKerjaText"];
+     // Keahlian, Project, Keahlian Lain di kanan
+     const rightIds = ["keahlianText", "projectText", "keahlianLainText"];
+
+     sections.forEach((section) => {
+      section.classList.remove("w-full", "mb-6");
+      // Determine side by checking the text div id
+      const textDiv = section.querySelector("div[id$='Text']");
+      if (!textDiv) {
+       // fallback: put in right column
+       rightColumn.appendChild(section);
+       return;
+      }
+      if (leftIds.includes(textDiv.id)) {
+       leftColumn.appendChild(section);
+      } else if (rightIds.includes(textDiv.id)) {
+       rightColumn.appendChild(section);
+      } else {
+       // fallback: right column
+       rightColumn.appendChild(section);
+      }
+     });
+     return;
+    }
+
+    // Jika ada yang terbuka → layout tetap 2 kolom
+    container.innerHTML = `
+        <div id="leftColumn" class="space-y-6 w-full md:w-1/2 pr-3"></div>
+        <div id="rightColumn" class="space-y-6 w-full md:w-1/2 pl-3"></div>
+      `;
+    const leftColumn = document.getElementById("leftColumn");
+    const rightColumn = document.getElementById("rightColumn");
+
+    sections.forEach((section) => {
+     const text = section.querySelector("div[id$='Text']");
+     if (text && text.style.display === "block") {
+      section.classList.remove("mb-6");
+      section.classList.add("w-full");
+      leftColumn.appendChild(section);
+     } else {
+      section.classList.remove("w-full");
+      section.classList.add("mb-6");
+      rightColumn.appendChild(section);
+     }
+    });
+   }
+
+   window.addEventListener("load", () => {
+    // Initialize layout on load
+    adjustLayout();
+   });
+  </script>
+ </head>
+ <body class="text-white">
+  <svg
+   id="backgroundPattern"
+   aria-hidden="true"
+   width="100%"
+   height="100%"
+   preserveAspectRatio="xMidYMid meet"
+   viewBox="0 0 100 100"
+   xmlns="http://www.w3.org/2000/svg"
+  >
+   <!-- Diagonal grid pattern -->
+   <defs>
+    <pattern
+     id="diagonalLines"
+     patternUnits="userSpaceOnUse"
+     width="10"
+     height="10"
+     patternTransform="rotate(45)"
+    >
+     <line x1="0" y="0" x2="0" y2="10" class="pattern-line" />
+    </pattern>
+   </defs>
+   <rect width="100%" height="100%" fill="url(#diagonalLines)" />
+
+   <!-- Accounting symbol: calculator -->
+   <g class="symbol" transform="translate(15 20) scale(0.8)">
+    <rect x="0" y="0" width="20" height="28" rx="3" ry="3" />
+    <rect x="3" y="3" width="14" height="6" fill="#8DBF4A" />
+    <rect x="3" y="12" width="4" height="4" fill="#8DBF4A" />
+    <rect x="9" y="12" width="4" height="4" fill="#8DBF4A" />
+    <rect x="15" y="12" width="4" height="4" fill="#8DBF4A" />
+    <rect x="3" y="18" width="4" height="4" fill="#8DBF4A" />
+    <rect x="9" y="18" width="4" height="4" fill="#8DBF4A" />
+    <rect x="15" y="18" width="4" height="4" fill="#8DBF4A" />
+    <rect x="3" y="24" width="16" height="2" fill="#8DBF4A" />
+   </g>
+
+   <!-- Finance symbol: bar chart -->
+   <g class="symbol" transform="translate(70 15) scale(0.9)">
+    <rect x="0" y="12" width="4" height="16" rx="1" ry="1" />
+    <rect x="8" y="8" width="4" height="20" rx="1" ry="1" />
+    <rect x="16" y="4" width="4" height="24" rx="1" ry="1" />
+    <rect x="24" y="0" width="4" height="28" rx="1" ry="1" />
+   </g>
+
+   <!-- Tax symbol: document with percent -->
+   <g class="symbol" transform="translate(40 70) scale(0.9)">
+    <rect x="0" y="0" width="20" height="28" rx="2" ry="2" />
+    <line x1="5" y1="8" x2="15" y2="8" stroke="#8DBF4A" stroke-width="2" />
+    <line x1="5" y1="14" x2="15" y2="14" stroke="#8DBF4A" stroke-width="2" />
+    <circle cx="7" cy="20" r="3" stroke="#8DBF4A" stroke-width="2" fill="none" />
+    <line x1="5" y1="18" x2="9" y2="22" stroke="#8DBF4A" stroke-width="2" />
+    <line x1="9" y1="18" x2="5" y2="22" stroke="#8DBF4A" stroke-width="2" />
+   </g>
+
+   <!-- Automation symbol: gear -->
+   <g class="symbol" transform="translate(80 75) scale(0.8)">
+    <circle cx="10" cy="10" r="6" stroke="#8DBF4A" stroke-width="2" fill="none" />
+    <circle cx="10" cy="10" r="3" fill="#8DBF4A" />
+    <line x1="10" y1="0" x2="10" y2="4" stroke="#8DBF4A" stroke-width="2" />
+    <line x1="10" y1="16" x2="10" y2="20" stroke="#8DBF4A" stroke-width="2" />
+    <line x1="0" y1="10" x2="4" y2="10" stroke="#8DBF4A" stroke-width="2" />
+    <line x1="16" y1="10" x2="20" y2="10" stroke="#8DBF4A" stroke-width="2" />
+    <line x1="4" y1="4" x2="6" y2="6" stroke="#8DBF4A" stroke-width="2" />
+    <line x1="14" y1="14" x2="16" y2="16" stroke="#8DBF4A" stroke-width="2" />
+    <line x1="4" y1="16" x2="6" y2="14" stroke="#8DBF4A" stroke-width="2" />
+    <line x1="14" y1="6" x2="16" y2="4" stroke="#8DBF4A" stroke-width="2" />
+   </g>
+  </svg>
+
+  <div id="content">
+   <div class="flex flex-col md:flex-row justify-between">
+    <div>
+     <h1 class="text-[#8DBF4A] font-extrabold text-2xl leading-tight">
+      ADE
+      <br />
+      SAPUTRA
+     </h1>
+     <p class="text-[#8DBF4A] font-semibold text-xs mt-1">
+      Spesialis Accounting, Financial Report, Tax
+      <br />
+      &amp; Automation System
+     </p>
+    </div>
+    <div class="text-right text-[10px] font-normal leading-tight space-y-1 mt-4 md:mt-0">
+     <p>
+      JLN TANAH SEREAL XVI RT05/RW10
+      <i class="fas fa-home ml-1"></i>
+     </p>
+     <p>JAKARTA BARAT, 11210</p>
+     <p>
+      +6287888370395
+      <i class="fas fa-phone ml-1"></i>
+     </p>
+     <p>IFKSPTR@GMAIL.COM 📧</p>
+    </div>
+   </div>
+   <div class="mt-4 mb-6">
+    <div class="border-t border-[#2A4B7C]"></div>
+    <div class="border-t border-[#2A4B7C] mt-1"></div>
+   </div>
+   <div
+    class="grid grid-cols-1 md:grid-cols-2 gap-6 text-[10px] leading-tight"
+    id="container"
+   >
+    <section class="mb-6">
+     <h2
+      class="text-[#8DBF4A] font-extrabold text-xs mb-1 border-b border-[#2A4B7C] pb-1 cursor-pointer select-none"
+      onclick="toggleBoth('tentangSayaText', 'tentangSayaImage', this)"
+     >
+      − TENTANG SAYA
+     </h2>
+     <div id="tentangSayaText" style="display: block">
+      <p class="text-white">
+       Sebagai seorang akuntan yang penuh inisiatif, saya memiliki keahlian
+       khusus dalam menyederhanakan proses pembuatan laporan dan pengolahan
+       data. Dengan pendekatan yang efisien dan detail, saya berkomitmen untuk
+       menyajikan informasi keuangan yang akurat dan mudah dipahami,
+       memastikan bahwa setiap aspek data keuangan dikelola dengan
+       profesionalisme tinggi. Keahlian saya tidak hanya mempercepat proses
+       kerja tetapi juga meningkatkan kualitas laporan keuangan yang menjadi
+       kunci pengambilan keputusan bisnis yang strategis.
+      </p>
+     </div>
+     <img
+      alt="Portrait of a focused accountant working on financial reports with charts and data on computer screens in a modern office"
+      class="mt-2 w-full max-w-full h-auto"
+      height="400"
+      id="tentangSayaImage"
+      src="https://i.imgur.com/ca4sTPq.png"
+      style="display: block"
+      width="600"
+     />
+    </section>
+    <section class="mb-6">
+     <h2
+      class="text-[#8DBF4A] font-extrabold text-xs mb-1 border-b border-[#2A4B7C] pb-1 cursor-pointer select-none"
+      onclick="toggleBoth('pendidikanText', 'pendidikanImage', this)"
+     >
+      + PENDIDIKAN
+     </h2>
+     <div id="pendidikanText" style="display: none">
+      <p class="text-white leading-tight">
+       SMKN 11 JAKARTA
+       <br />
+       JAKARTA BARAT
+       <br />
+       2021
+      </p>
+      <span class="text-[#8DBF4A] text-[8px] font-semibold">IJAZAH SMK</span>
+      <ul class="custom-bullet mt-3 space-y-1 text-white">
+       <li>Memahami prinsip-prinsip dasar akuntansi</li>
+       <li>Mengenal sistem perpajakan</li>
+       <li>Mengetahui akuntansi untuk lembaga dan manajemen keuangan</li>
+       <li>Menguasai akuntansi berbasis komputer</li>
+      </ul>
+     </div>
+     <img
+      alt="Illustration representing Pendidikan section with icons and documents"
+      class="mt-2 w-full"
+      height="400"
+      id="pendidikanImage"
+      src="https://storage.googleapis.com/a1aa/image/2739a252-9302-46c7-3895-d19788dd6a84.jpg"
+      style="display: none"
+      width="600"
+     />
+    </section>
+    <section class="mb-6">
+     <h2
+      class="text-[#8DBF4A] font-extrabold text-xs mb-1 border-b border-[#2A4B7C] pb-1 cursor-pointer select-none"
+      onclick="toggleBoth('pengalamanKerjaText', 'pengalamanKerjaImage', this)"
+     >
+      + PENGALAMAN KERJA
+     </h2>
+     <div id="pengalamanKerjaText" style="display: none">
+      <p class="text-white mb-1">
+       PT TIGA MUSTIKA KONSULTAN
+       <br />
+       JAKARTA
+       <br />
+       Jan 2022-Sekarang
+      </p>
+      <span class="text-[#8DBF4A] text-[8px] font-semibold block mb-2"
+       >Staff Accounting Tax</span
+      >
+      <ul class="custom-bullet pl-4 space-y-1 text-[8px] text-white">
+       <li>
+        Melakukan penjualan transaksi perusahaan terkait biaya, penjualan,
+        pembelian. Beserta jurnal penyesuaian
+       </li>
+       <li>
+        Melakukan rekonsiliasi Bank, akun piutang (AR), akun hutang (AP), dan
+        pajak.
+       </li>
+       <li>Menyusun laporan pembelian secara rinci.</li>
+       <li>Menyusun laporan penjualan secara rinci.</li>
+       <li>
+        Menyusun laporan keuangan yang mencakup neraca dan laporan laba rugi,
+        baik untuk kepentingan internal maupun Pajak.
+       </li>
+       <li>Menyusun laporan Arus Kas</li>
+       <li>
+        Memahami Perhitungan pajak PPh 21, PPh 23, PPh 25, pajak final, dan pajak
+        badan.
+       </li>
+       <li>Membuat Perhitungan Pajak Badan</li>
+       <li>
+        Melakukan Stock opname serta membuat laporan stock agar Barang atau
+        persediaan sesuai dan sejalan dengan Laporan Keuangan yang di sajikan
+       </li>
+      </ul>
+     </div>
+     <img
+      alt="Illustration representing Pengalaman Kerja section with office and documents"
+      class="mt-2 w-full"
+      height="400"
+      id="pengalamanKerjaImage"
+      src="https://storage.googleapis.com/a1aa/image/3cf212bb-0659-4034-de57-767afc4b884f.jpg"
+      style="display: none"
+      width="600"
+     />
+    </section>
+    <section class="mb-6">
+     <h2
+      class="text-[#8DBF4A] font-extrabold text-xs mb-1 border-b border-[#2A4B7C] pb-1 cursor-pointer select-none"
+      onclick="toggleBoth('keahlianText', 'keahlianImage', this)"
+     >
+      + KEAHLIAN
+     </h2>
+     <div id="keahlianText" style="display: none">
+      <ul class="custom-bullet space-y-1 text-white">
+       <li>Menolah dan mengontrol data keuangan beserta perpajakan perusahaan</li>
+       <li>
+        Membuat Laporan Neraca, Laba-Rugi, Arus Kas, Pembelian, Penjualan, Dan
+        laporan keuangan lainnya seperti AR/AP
+       </li>
+       <li>Membuat Laporan Stock Dan Daftar Aset</li>
+      </ul>
+     </div>
+     <img
+      alt="Illustration of financial data charts, reports, and accounting documents representing Keahlian section"
+      class="mt-2 w-full"
+      height="400"
+      id="keahlianImage"
+      src="https://storage.googleapis.com/a1aa/image/abbc22a0-7170-4431-52e0-4fa62fe8e9c2.jpg"
+      style="display: none"
+      width="600"
+     />
+    </section>
+    <section class="mb-6">
+     <h2
+      class="text-[#8DBF4A] font-extrabold text-xs mb-1 border-b border-[#2A4B7C] pb-1 cursor-pointer select-none"
+      onclick="toggleBoth('projectText', 'projectImage', this)"
+     >
+      + PROJECT
+     </h2>
+     <div id="projectText" style="display: none">
+      <ul class="custom-bullet space-y-1 text-white">
+       <li>automatisasi penginputan</li>
+       <li>konverter pdf to excel format</li>
+      </ul>
+     </div>
+     <img
+      alt="Illustration representing Project section with automation and PDF to Excel icons"
+      class="mt-2 w-full"
+      height="400"
+      id="projectImage"
+      src="https://storage.googleapis.com/a1aa/image/bf6de8d1-ccf1-4c74-9529-fb9ea54a7b01.jpg"
+      style="display: none"
+      width="600"
+     />
+    </section>
+    <section class="mb-6">
+     <h2
+      class="text-[#8DBF4A] font-extrabold text-xs mb-1 border-b border-[#2A4B7C] pb-1 cursor-pointer select-none"
+      onclick="toggleBoth('keahlianLainText', 'keahlianLainImage', this)"
+     >
+      + KEAHLIAN LAIN
+     </h2>
+     <div id="keahlianLainText" style="display: none">
+      <ul class="custom-bullet space-y-1 text-white">
+       <li>
+        Membuat sistem penginputan otomatis dari Excel ke dalam sistem
+        akuntansi Accurate desktop, yang mencakup penginputan ke dalam Journal
+        Voucher, Sales Invoice, Purchase Invoice, serta Payment Cash/Bank.
+       </li>
+       <li>
+        Membuat Aat converter PDF Ke Excel, Jika memungkinkan Format Hasil
+        Convert dapat disesuaikan dengan kebutuhan(Seperti dalam bentuk Rekapan)
+       </li>
+      </ul>
+     </div>
+     <img
+      alt="Illustration representing Keahlian Lain section with automation and Excel icons"
+      class="mt-2 w-full"
+      height="400"
+      id="keahlianLainImage"
+      src="https://storage.googleapis.com/a1aa/image/52137695-a3c2-463a-1acc-5228dab02ce7.jpg"
+      style="display: none"
+      width="600"
+     />
+    </section>
+   </div>
+  </div>
+ </body>
+</html>

@@ -16,7 +16,7 @@
       height: 100%;
       margin: 0;
       font-family: "Inter", sans-serif;
-      background-color: #000000;
+      background-color: #071B2F; /* Dark navy blue as in screenshot */
       overflow: hidden;
     }
     body {
@@ -51,8 +51,8 @@
       padding-left: 1rem;
     }
     ul.custom-bullet > li::before {
-      content: "➢";
-      color: #8dbf4a;
+      content: "▹";
+      color: #5DE0D0; /* toska color from screenshot */
       display: inline-block;
       width: 1em;
       margin-left: -1em;
@@ -76,8 +76,8 @@
       flex: 1 1 auto;
       overflow-y: auto;
       max-height: 100vh;
-      padding: 1.5rem 1rem;
-      max-width: 80rem;
+      padding: 1.5rem 2rem;
+      max-width: 1400px;
       margin-left: 3rem;
       margin-right: 1rem;
     }
@@ -86,10 +86,10 @@
       width: 8px;
     }
     #content::-webkit-scrollbar-track {
-      background: #111827;
+      background: #0a192f;
     }
     #content::-webkit-scrollbar-thumb {
-      background-color: #8dbf4a;
+      background-color: #5DE0D0;
       border-radius: 4px;
     }
     .lang-toggle {
@@ -102,6 +102,12 @@
       gap: 0.5rem;
       align-items: flex-start;
     }
+    .lang-btn:hover {
+      background-color: #173F77 !important;
+      opacity: 1 !important;
+      color: white !important;
+      border-color: #5DE0D0;
+    }
 
     .lang-toggle .tooltip {
       position: relative;
@@ -111,7 +117,7 @@
     .lang-toggle .tooltip .tooltiptext {
       visibility: hidden;
       width: auto;
-      background-color: #8dbf4a;
+      background-color: #5DE0D0;
       color: black;
       text-align: center;
       border-radius: 4px;
@@ -130,13 +136,18 @@
     }
     .lang-btn {
       padding: 0.25rem 0.75rem;
-      background-color: #8dbf4a;
-      color: black;
+      background-color: rgba(93, 224, 208, 0.2);
+      color: #5DE0D0;
+      border: 2px solid #5DE0D0;
       border-radius: 0.375rem;
       font-size: 0.875rem;
-      min-width: 20px;         /* agar ukuran awal setara */
+      min-width: 20px;
       transition: all 0.2s ease;
       white-space: nowrap;
+      font-weight: 600;
+    }
+    .lang-btn:hover {
+      background-color: rgba(93, 224, 208, 0.2);
     }
     @media (max-width: 768px) {
       #content {
@@ -148,39 +159,74 @@
         top: 1rem;
         left: 0.5rem;
       }
+      #container {
+        display: block !important;
+      }
+      #leftColumn, #rightColumn {
+        width: 100% !important;
+        padding-left: 0 !important;
+        padding-right: 0 !important;
+      }
+      section {
+        margin-bottom: 1.5rem !important;
+        width: 100% !important;
+      }
+      .header-contact {
+        text-align: left !important;
+        max-width: 100% !important;
+        margin-top: 1rem !important;
+      }
     }
+   .open-section {
+     background-color: #1E3A6A; /* solid blue as screenshot */
+     border: 1px solid #2A4B7C;
+     border-radius: 0.5rem;
+     transition: background-color 0.2s ease, border-color 0.2s ease;
+     }
+
+  .open-section:hover {
+     background-color: rgba(93, 224, 208, 0.35) !important; /* toska highlight */
+     border: 1px solid rgba(93, 224, 208, 0.50) !important;
+     }
   </style>
   <script>
    function toggleBoth(textId, imageId, header) {
-      const container = header.closest("#content") || document;
-      const allTextEls = container.querySelectorAll("[id$='Text']");
-      const allImageEls = container.querySelectorAll("[id$='Image']");
-      const allHeaders = container.querySelectorAll("h2");
+  const container = header.closest("#content") || document;
+  const allTextEls = container.querySelectorAll("[id$='Text']");
+  const allImageEls = container.querySelectorAll("[id$='Image']");
+  const allHeaders = container.querySelectorAll("h2");
+  const allSections = container.querySelectorAll("section");
 
-      const textEl = container.querySelector("#" + textId);
-      const imageEl = container.querySelector("#" + imageId);
-      const headerEl = header;
+  const textEl = container.querySelector("#" + textId);
+  const imageEl = container.querySelector("#" + imageId);
+  const headerEl = header;
+  const sectionEl = header.closest("section");
 
-      const isCurrentlyVisible = textEl.style.display === "block";
+  const isCurrentlyVisible = textEl.style.display === "block";
 
-      // Close all
-      allTextEls.forEach((el) => {
-        el.style.display = "none";
-        el.classList.remove("fade-in-up");
-      });
-      allImageEls.forEach((el) => (el.style.display = "none"));
-      allHeaders.forEach((h) => {
-        h.innerHTML = h.innerHTML.replace("−", "+");
-      });
+  // Close all
+  allTextEls.forEach((el) => {
+    el.style.display = "none";
+    el.classList.remove("fade-in-up");
+  });
+  allImageEls.forEach((el) => (el.style.display = "none"));
+  allHeaders.forEach((h) => {
+    h.innerHTML = h.innerHTML.replace("−", "+");
+  });
+  allSections.forEach((sec) => sec.classList.remove("open-section")); // reset all backgrounds
 
-      if (!isCurrentlyVisible) {
-        textEl.style.display = "block";
-        imageEl.style.display = "block";
-        textEl.classList.remove("fade-in-up");
-        void textEl.offsetWidth;
-        textEl.classList.add("fade-in-up");
-        headerEl.innerHTML = headerEl.innerHTML.replace("+", "−");
-      }
+  // Open selected if previously closed
+  if (!isCurrentlyVisible) {
+    textEl.style.display = "block";
+    imageEl.style.display = "block";
+    textEl.classList.remove("fade-in-up");
+    void textEl.offsetWidth;
+    textEl.classList.add("fade-in-up");
+    headerEl.innerHTML = headerEl.innerHTML.replace("+", "−");
+
+    // Add active background class
+    sectionEl.classList.add("open-section");
+  }
       adjustLayout(headerEl.closest("#content"));
     }
 
@@ -215,7 +261,7 @@
         return text && text.style.display === "block";
       });
 
-      // Jika tidak ada yang terbuka → default 2 kolom dengan pembagian manual
+      // If none open → default 2 columns with manual distribution
       if (visibleSections.length === 0) {
         container.innerHTML = `
           <div id="leftColumn" class="space-y-6 w-full md:w-1/2 pr-3"></div>
@@ -224,17 +270,15 @@
         const leftColumn = container.querySelector("#leftColumn");
         const rightColumn = container.querySelector("#rightColumn");
 
-        // Tentang Saya, Pendidikan, Pengalaman Kerja di kiri
+        // Tentang Saya, Pendidikan, Pengalaman Kerja on left
         const leftIds = ["tentangSayaText", "pendidikanText", "pengalamanKerjaText"];
-        // Keahlian, Project, Keahlian Lain di kanan
+        // Keahlian, Project, Keahlian Lain on right
         const rightIds = ["keahlianText", "projectText", "keahlianLainText"];
 
         sections.forEach((section) => {
           section.classList.remove("w-full", "mb-6");
-          // Determine side by checking the text div id
           const textDiv = section.querySelector("div[id$='Text']");
           if (!textDiv) {
-            // fallback: put in right column
             rightColumn.appendChild(section);
             return;
           }
@@ -243,17 +287,16 @@
           } else if (rightIds.includes(textDiv.id)) {
             rightColumn.appendChild(section);
           } else {
-            // fallback: right column
             rightColumn.appendChild(section);
           }
         });
         return;
       }
 
-      // Jika ada yang terbuka → layout tetap 2 kolom
+      // If any open → 2 columns with left 2/3 and right 1/3
       container.innerHTML = `
-        <div id="leftColumn" class="space-y-6 w-full md:w-1/2 pr-3"></div>
-        <div id="rightColumn" class="space-y-6 w-full md:w-1/2 pl-3"></div>
+        <div id="leftColumn" class="space-y-6 w-full md:w-2/3 pr-6"></div>
+        <div id="rightColumn" class="space-y-6 w-full md:w-1/3 pl-6"></div>
       `;
       const leftColumn = container.querySelector("#leftColumn");
       const rightColumn = container.querySelector("#rightColumn");
@@ -276,7 +319,16 @@
       // Initialize layout on load for both language containers
       document.querySelectorAll("#lang-id, #lang-en").forEach((langDiv) => {
         adjustLayout(langDiv);
+        const sections = langDiv.querySelectorAll("section");
+    	sections.forEach((section) => {
+      	 const textEl = section.querySelector("div[id$='Text']");
+      	 if (textEl && textEl.style.display === "block") {
+         section.classList.add("open-section");
+      	}
       });
+     });
+      // Show Indonesian by default
+      switchLanguage('id');
     });
 
     function switchLanguage(lang) {
@@ -363,349 +415,30 @@
    </g>
   </svg>
   <div class="lang-toggle">
-    <button id="btn-id"
-      class="lang-btn"
-      onclick="switchLanguage('id')"
-      onmouseenter="this.innerText='🇮🇩 Indonesian'"
-      onmouseleave="this.innerText='🇮🇩'">
+    <button id="btn-id" class="lang-btn" onclick="switchLanguage('id')" onmouseenter="this.innerText='🇮🇩 Indonesian'" onmouseleave="this.innerText='🇮🇩'">
       🇮🇩
     </button>
-    <button id="btn-en"
-      class="lang-btn"
-      onclick="switchLanguage('en')"
-      onmouseenter="this.innerText='🇺🇸 English'"
-      onmouseleave="this.innerText='🇺🇸'">
+    <button id="btn-en" class="lang-btn" onclick="switchLanguage('en')" onmouseenter="this.innerText='🇺🇸 English'" onmouseleave="this.innerText='🇺🇸'">
       🇺🇸
     </button>
   </div>
-</div>
   <!-- Indonesian content -->
-  <div class="visible" id="lang-id">
-   <div aria-label="Profil Ade Saputra Bahasa Indonesia" id="content" role="main">
-    <div class="flex flex-col md:flex-row justify-between">
+  <div class="hidden" id="lang-id">
+   <div aria-label="Profil Ade Saputra Bahasa Indonesia" id="content" class="max-w-[1400px] mx-auto px-6" role="main">
+    <div class="flex flex-col md:flex-row justify-between items-center md:items-start">
      <div>
-      <h1 class="text-[#8DBF4A] font-extrabold text-2xl leading-tight select-none">
+      <h1 class="text-[#64ffda] font-extrabold text-3xl leading-tight select-none">
        ADE
        <br/>
        SAPUTRA
       </h1>
-      <p class="text-[#8DBF4A] font-semibold text-xs mt-1 select-none">
-       Spesialis Accounting, Financial Report, Tax
-       <br/>
-       &amp; Automation System
-      </p>
-     </div>
-     <div class="text-right text-[10px] font-normal leading-tight space-y-1 mt-4 md:mt-0 select-text">
-      <p>
-       JLN TANAH SEREAL XVI RT05/RW10
-       <i aria-hidden="true" class="fas fa-home ml-1">
-       </i>
-      </p>
-      <p>
-       JAKARTA BARAT, 11210
-      </p>
-      <p>
-       +6287888370395
-       <i aria-hidden="true" class="fas fa-phone ml-1">
-       </i>
-      </p>
-      <p>
-       IFKSPTR@GMAIL.COM 📧
-      </p>
-     </div>
-    </div>
-    <div class="mt-4 mb-6">
-     <div class="border-t border-[#2A4B7C]">
-     </div>
-     <div class="border-t border-[#2A4B7C] mt-1">
-     </div>
-    </div>
-    <div class="grid grid-cols-1 md:grid-cols-2 gap-6 text-[10px] leading-tight" id="container">
-     <section class="mb-6">
-      <h2 aria-controls="tentangSayaText tentangSayaImage" aria-expanded="true" class="text-[#8DBF4A] font-extrabold text-xs mb-1 border-b border-[#2A4B7C] pb-1 cursor-pointer select-none" onclick="toggleBoth('tentangSayaText', 'tentangSayaImage', this)" onkeydown="if(event.key==='Enter' || event.key===' ') toggleBoth('tentangSayaText', 'tentangSayaImage', this)" tabindex="0">
-       − 👤 TENTANG SAYA
-      </h2>
-      <div id="tentangSayaText" style="display: block" tabindex="0">
-       <p class="text-white">
-        Saya adalah akuntan profesional yang berfokus pada efisiensi, ketelitian, dan penyajian informasi keuangan yang akurat dan mudah dipahami. Berbekal pemahaman mendalam terhadap struktur data, saya mampu menyusun laporan yang mendukung pengambilan keputusan strategis serta mengembangkan sistem pelaporan dan otomasi kerja yang inovatif dan berkelanjutan.
-       </p>
-      </div>
-      <img
-      alt="Portrait of a focused accountant working on financial reports with charts and data on computer screens in a modern office"
-      class="mt-2 w-full max-w-full h-auto"
-      height="400"
-      id="tentangSayaImage"
-      src="https://i.imgur.com/ca4sTPq.png"
-      style="display: block"
-      width="600"
-     />
-     </section>
-     <section class="mb-6">
-      <h2 aria-controls="pendidikanText pendidikanImage" aria-expanded="false" class="text-[#8DBF4A] font-extrabold text-xs mb-1 border-b border-[#2A4B7C] pb-1 cursor-pointer select-none" onclick="toggleBoth('pendidikanText', 'pendidikanImage', this)" onkeydown="if(event.key==='Enter' || event.key===' ') toggleBoth('pendidikanText', 'pendidikanImage', this)" tabindex="0">
-       + 🎓 PENDIDIKAN
-      </h2>
-      <div id="pendidikanText" style="display: none" tabindex="0">
-       <p class="text-white leading-tight">
-        SMKN 11 JAKARTA
-        <br/>
-        JAKARTA BARAT
-        <br/>
-        2021
-       </p>
-       <span class="text-[#8DBF4A] text-[8px] font-semibold">
-        IJAZAH SMK
-       </span>
-       <ul class="custom-bullet mt-3 space-y-1 text-white">
-        <li>
-         Memahami prinsip-prinsip dasar akuntansi
-        </li>
-        <li>
-         Mengenal sistem perpajakan
-        </li>
-        <li>
-         Mengetahui akuntansi untuk lembaga dan manajemen keuangan
-        </li>
-        <li>
-         Menguasai penggunaan software akuntansi berbasis komputer (Accurate, Myob, Excel)
-        </li>
-       </ul>
-      </div>
-      <img alt="Illustration representing Pendidikan section with icons and documents" class="mt-2 w-full rounded-md" height="400" id="pendidikanImage" loading="lazy" src="https://storage.googleapis.com/a1aa/image/530279c3-b01b-478e-16e7-707523c29162.jpg" style="display: none" width="600"/>
-     </section>
-     <section class="mb-6">
-      <h2 aria-controls="pengalamanKerjaText pengalamanKerjaImage" aria-expanded="false" class="text-[#8DBF4A] font-extrabold text-xs mb-1 border-b border-[#2A4B7C] pb-1 cursor-pointer select-none" onclick="toggleBoth('pengalamanKerjaText', 'pengalamanKerjaImage', this)" onkeydown="if(event.key==='Enter' || event.key===' ') toggleBoth('pengalamanKerjaText', 'pengalamanKerjaImage', this)" tabindex="0">
-       + 💼 PENGALAMAN KERJA
-      </h2>
-      <div id="pengalamanKerjaText" style="display: none" tabindex="0">
-       <p class="text-white mb-1">
-        PT TIGA MUSTIKA KONSULTAN
-        <br/>
-        JAKARTA
-        <br/>
-        Jan 2022-Sekarang
-       </p>
-       <span class="text-[#8DBF4A] text-[8px] font-semibold block mb-2">
-        Staff Accounting Tax
-       </span>
-       <ul class="custom-bullet pl-4 space-y-1 text-[8px] text-white">
-        <li>
-         Melakukan penjurnalan transaksi perusahaan terkait biaya, penjualan, pembelian. Beserta jurnal penyesuaian.
-        </li>
-        <li>
-         Menggunakan software akuntansi seperti Accurate, atau Excel untuk otomatisasi dan efisiensi pelaporan.
-        </li>
-        <li>
-         Menyusun laporan pembelian secara rinci.
-        </li>
-        <li>
-         Menyusun laporan penjualan secara rinci.
-        </li>
-        <li>
-         Melakukan rekonsiliasi Bank, akun piutang (AR), akun hutang (AP), dan pajak.
-        </li>
-        <li>
-         Menyusun laporan keuangan yang mencakup neraca dan laporan laba rugi, baik untuk kepentingan internal maupun Pajak.
-        </li>
-        <li>
-         Menyusun laporan Arus Kas
-        </li>
-        <li>
-         Memahami Perhitungan pajak PPh 21, PPh 23, PPh 25, pajak final, dan pajak badan.
-        </li>
-        <li>
-         Melakukan analisis varians terhadap laporan keuangan untuk memberikan insight kepada manajemen. Memberikan rekomendasi efisiensi biaya berdasarkan data keuangan.
-        </li>
-        <li>
-         Melakukan stock opname dan menyusun laporan persediaan yang akurat serta konsisten dengan laporan keuangan.
-        </li>
-	<li>
-         Berpengalaman menangani ±20 perusahaan dari berbagai sektor industri, termasuk F&B, jasa, sewa, dagang, manufaktur, hingga konstruksi, dengan karakteristik dan kebutuhan pelaporan keuangan yang beragam.
-        </li>
-       </ul>
-      </div>
-      <img alt="Illustration representing Pengalaman Kerja section with office and documents" class="mt-2 w-full rounded-md" height="400" id="pengalamanKerjaImage" loading="lazy" src="https://storage.googleapis.com/a1aa/image/76697854-b878-41fb-bc7b-2468de722c81.jpg" style="display: none" width="600"/>
-     </section>
-     <section class="mb-6">
-      <h2 aria-controls="keahlianText keahlianImage" aria-expanded="false" class="text-[#8DBF4A] font-extrabold text-xs mb-1 border-b border-[#2A4B7C] pb-1 cursor-pointer select-none" onclick="toggleBoth('keahlianText', 'keahlianImage', this)" onkeydown="if(event.key==='Enter' || event.key===' ') toggleBoth('keahlianText', 'keahlianImage', this)" tabindex="0">
-       + 🧠 KEAHLIAN
-      </h2>
-      <div id="keahlianText" style="display: none" tabindex="0">
-       <ul class="custom-bullet space-y-1 text-white">
-        <li>
-         <strong>
-          Accounting
-         </strong>
-         <br/>
-         Mengelola dan mencatat seluruh aktivitas keuangan perusahaan secara sistematis, akurat, dan sesuai standar akuntansi.
-         <ul class="list-disc list-inside ml-4 space-y-1">
-          <li>
-           Jurnal Akuntansi
-          </li>
-          <li>
-           Buku Kas dan Bank
-          </li>
-          <li>
-           Mencatat mutasi persediaan (barang masuk & keluar)
-          </li>
-          <li>
-           Rekonsiliasi Kas, Bank, dan Pajak
-          </li>
-         </ul>
-        </li>
-        <li>
-         <strong>
-          Financial Report
-         </strong>
-         <br/>
-         Menyusun laporan keuangan secara tepat, akurat, detail, dan mudah dipahami sebagai dasar pengambilan keputusan.
-         <ul class="list-disc list-inside ml-4 space-y-1">
-          <li>
-           Laporan Neraca, Laba Rugi, Arus Kas
-          </li>
-          <li>
-           Laporan Rincian Penjualan
-          </li>
-          <li>
-           Laporan Rincian Pembelian
-          </li>
-          <li class="whitespace-nowrap">
-           Account Receivable / Account Payable (AR/AP)
-          </li>
-          <li>
-           Laporan Stok
-          </li>
-          <li>
-           Daftar Aset
-          </li>
-         </ul>
-        </li>
-        <li>
-         <strong>
-          Tax
-         </strong>
-         <br/>
-         <span class="block mb-1">
-          Mengelola kewajiban perpajakan secara tepat waktu dan sesuai peraturan perpajakan yang berlaku.
-         </span>
-         <ul class="list-disc list-inside ml-4 space-y-1">
-	  <li>
-           Perencanaan Pajak (Tax Planning)
-          </li>
-          <li>
-           Pajak Masa (PPh 21, Unifikasi, dan PPN)
-          </li>
-          <li>
-           Pajak Tahunan Badan (Final / PPh 25/29)
-          </li>
-         </ul>
-        </li>
-       </ul>
-      </div>
-      <img alt="Illustration of financial data charts, reports, and accounting documents representing Keahlian section" class="mt-2 w-full rounded-md" height="400" id="keahlianImage" loading="lazy" src="https://storage.googleapis.com/a1aa/image/730cc841-169c-4190-daae-510055f80694.jpg" style="display: none" width="600"/>
-     </section>
-     <section class="mb-6">
-      <h2 aria-controls="projectText projectImage" aria-expanded="false" class="text-[#8DBF4A] font-extrabold text-xs mb-1 border-b border-[#2A4B7C] pb-1 cursor-pointer select-none" onclick="toggleBoth('projectText', 'projectImage', this)" onkeydown="if(event.key==='Enter' || event.key===' ') toggleBoth('projectText', 'projectImage', this)" tabindex="0">
-       + 🛠️ PROYEK
-      </h2>
-      <div id="projectText" style="display: none" tabindex="0">
-       <ul class="custom-bullet space-y-1 text-white">
-        <li>
-         Mengembangkan sistem otomatisasi berbasis bot untuk proses penginputan data dari Excel ke dalam software akuntansi Accurate 4 Desktop, yang mencakup:
-         <ul class="list-disc list-inside ml-6 space-y-1">
-          <li>
-           Journal Voucher
-          </li>
-          <li>
-           Sales Invoice
-          </li>
-          <li>
-           Purchase Invoice
-          </li>
-          <li>
-           Payment Cash/Bank
-          </li>
-         </ul>
-         Sistem ini berhasil mempercepat proses input data dan Mengurangi beban kerja administratif secara signifikan dalam proses akuntansi klien.
-        </li>
-        <li>
-         Membangun konverter cerdas yang mengubah berbagai file PDF transaksi, menjadi format Excel siap pakai.
-         <ul class="list-disc list-inside ml-6 space-y-1">
-          <li>
-           Converter E-Statement (Rekening Koran BCA - PDF) ke format rekap Excel
-          </li>
-          <li>
-           Converter Bukti Potong Coretax (PDF) ke format rekap Excel
-          </li>
-          <li>
-           Bot otomatisasi proses download Bukti Potong dari sistem Coretax
-          </li>
-         </ul>
-         Konverter ini mempercepat proses pengolahan data dan meningkatkan akurasi rekonsiliasi laporan keuangan.
-        </li>
-       </ul>
-      </div>
-      <img alt="Illustration representing Project section with automation and PDF to Excel icons" class="mt-2 w-full rounded-md" height="400" id="projectImage" loading="lazy" src="https://storage.googleapis.com/a1aa/image/b441e94b-6f21-4540-fc07-595b90ac4159.jpg" style="display: none" width="600"/>
-     </section>
-     <section class="mb-6">
-      <h2 aria-controls="keahlianLainText keahlianLainImage" aria-expanded="false" class="text-[#8DBF4A] font-extrabold text-xs mb-1 border-b border-[#2A4B7C] pb-1 cursor-pointer select-none" onclick="toggleBoth('keahlianLainText', 'keahlianLainImage', this)" onkeydown="if(event.key==='Enter' || event.key===' ') toggleBoth('keahlianLainText', 'keahlianLainImage', this)" tabindex="0">
-       + ⚙️ KEAHLIAN LAIN
-      </h2>
-      <div id="keahlianLainText" style="display: none" tabindex="0">
-       <ul class="custom-bullet space-y-1 text-white">
-        <li>
-         <strong>
-          Automation &amp; Bot System
-         </strong>
-         <br/>
-         Mengembangkan sistem otomatisasi berbasis bot untuk penginputan data dari Excel ke software akuntansi
-         <strong>
-          Accurate Desktop
-         </strong>
-         , Sistem ini dibuat menggunakan Python, Excel, dan Accurate, dengan fokus pada efisiensi Transaksi berulang dan kemampuan penyesuaian.
-        </li>
-        <li>
-         <strong>
-          Converter to Excel Template
-         </strong>
-         <br/>
-         Mengembangkan converter dokumen berbasis Python yang mengubah file PDF menjadi template Excel sesuai kebutuhan.
-        </li>
-         <li>
-         <strong>Problem Solving</strong><br/>
-         Mampu mengidentifikasi akar permasalahan dalam pelaporan keuangan, data tidak konsisten, atau sistem bermasalah, lalu memberikan solusi efektif yang bisa diterapkan langsung.
-        </li>
-        <li>
-          <strong>Analisis Data Keuangan</strong><br/>
-          Menyaring dan mengolah data dari berbagai sumber (Laporan Keuangan, Pencatatan Jurnal, Pajak,Bukti Transaksi , dsb) untuk menghasilkan laporan yang akurat dan insight yang berguna.
-        </li>
-        <li>
-          <strong>Adaptasi Multi-Industri</strong><br/>
-          Terbiasa menangani klien dari berbagai sektor bisnis dengan karakteristik dan kebutuhan laporan yang unik.
-        </li>
-       </ul>
-      </div>
-      <img alt="Illustration representing Keahlian Lain section with automation and Excel icons" class="mt-2 w-full rounded-md" height="400" id="keahlianLainImage" loading="lazy" src="https://storage.googleapis.com/a1aa/image/43f77ff9-5b02-4abf-e623-dbc39ba61194.jpg" style="display: none" width="600"/>
-     </section>
-    </div>
-   </div>
-  </div>
-  <!-- English content -->
-  <div class="hidden" id="lang-en">
-   <div aria-label="Ade Saputra Profile English" id="content" role="main">
-    <div class="flex flex-col md:flex-row justify-between">
-     <div>
-      <h1 class="text-[#8DBF4A] font-extrabold text-2xl leading-tight select-none">
-       ADE
-       <br/>
-       SAPUTRA
-      </h1>
-      <p class="text-[#8DBF4A] font-semibold text-xs mt-1 select-none">
+      <p class="text-[#5DE0D0] font-semibold text-xs mt-1 max-w-[320px] leading-tight select-none">
        Specialist in Accounting, Financial Report, Tax
        <br/>
        &amp; Automation System
       </p>
      </div>
-     <div class="text-right text-[10px] font-normal leading-tight space-y-1 mt-4 md:mt-0 select-text">
+     <div class="text-right text-xs font-mono text-secondary space-y-1 mt-4 md:mt-0 select-text">
       <p>
        JLN TANAH SEREAL XVI RT05/RW10
        <i aria-hidden="true" class="fas fa-home ml-1">
@@ -715,7 +448,7 @@
        JAKARTA BARAT, 11210
       </p>
       <p>
-       +6287888370395
+       +6285158662423
        <i aria-hidden="true" class="fas fa-phone ml-1">
        </i>
       </p>
@@ -725,267 +458,309 @@
      </div>
     </div>
     <div class="mt-4 mb-6">
-     <div class="border-t border-[#2A4B7C]">
+     <div class="border-t border-[#64ffda]">
      </div>
-     <div class="border-t border-[#2A4B7C] mt-1">
+     <div class="border-t border-[#64ffda] mt-1">
      </div>
     </div>
-    <div class="grid grid-cols-1 md:grid-cols-2 gap-6 text-[10px] leading-tight" id="container">
-     <section class="mb-6">
-      <h2 aria-controls="tentangSayaText tentangSayaImage" aria-expanded="true" class="text-[#8DBF4A] font-extrabold text-xs mb-1 border-b border-[#2A4B7C] pb-1 cursor-pointer select-none" onclick="toggleBoth('tentangSayaText', 'tentangSayaImage', this)" onkeydown="if(event.key==='Enter' || event.key===' ') toggleBoth('tentangSayaText', 'tentangSayaImage', this)" tabindex="0">
-       − 👤 ABOUT ME
-      </h2>
-      <div id="tentangSayaText" style="display: block" tabindex="0">
-       <p class="text-white">
-        I’m a professional accountant with a strong passion for simplifying financial reporting and data processing. By combining efficiency, accuracy, and a deep understanding of data structures, I provide clear and reliable financial insights. I’m also experienced in developing innovative reporting systems and workflow automations that not only improve accuracy and speed, but also support business sustainability and long-term growth.
-       </p>
-      </div>
-      <img
-      alt="Portrait of a focused accountant working on financial reports with charts and data on computer screens in a modern office"
-      class="mt-2 w-full max-w-full h-auto"
-      height="400"
-      id="tentangSayaImage"
-      src="https://i.imgur.com/ca4sTPq.png"
-      style="display: block"
-      width="600"
-     />
-     </section>
-     <section class="mb-6">
-      <h2 aria-controls="pendidikanText pendidikanImage" aria-expanded="false" class="text-[#8DBF4A] font-extrabold text-xs mb-1 border-b border-[#2A4B7C] pb-1 cursor-pointer select-none" onclick="toggleBoth('pendidikanText', 'pendidikanImage', this)" onkeydown="if(event.key==='Enter' || event.key===' ') toggleBoth('pendidikanText', 'pendidikanImage', this)" tabindex="0">
-       + 🎓 EDUCATION
-      </h2>
-      <div id="pendidikanText" style="display: none" tabindex="0">
-       <p class="text-white leading-tight">
+    <div id="container" class="flex flex-col md:flex-row gap-6">
+     <div id="leftColumn" class="space-y-6 w-full md:w-2/3 pr-6">
+      <section class="mb-6 hover:bg-[#ffffff0a] transition duration-300 rounded-lg p-2 w-full open-section">
+       <h2 aria-controls="tentangSayaText tentangSayaImage" aria-expanded="true" class="text-[#5DE0D0] font-bold text-sm mb-2 border-b border-[#5DE0D0] pb-1 cursor-pointer select-none" onclick="toggleBoth('tentangSayaText', 'tentangSayaImage', this)" onkeydown="if(event.key==='Enter' || event.key===' ') toggleBoth('tentangSayaText', 'tentangSayaImage', this)" tabindex="0">
+        − 👤 TENTANG SAYA
+       </h2>
+       <div id="tentangSayaText" style="display: block" tabindex="0" class="text-white text-base leading-relaxed">
+        Saya adalah profesional di bidang akuntansi, keuangan, dan perpajakan yang terbiasa menyusun laporan keuangan lengkap untuk keperluan manajemen dan pelaporan fiskal. Saya fokus pada efisiensi, ketelitian, dan struktur pelaporan yang rapi agar mudah dipahami dan diaudit. Dengan pengalaman menangani berbagai entitas dari sektor F&amp;B, dagang, jasa, logistik, kontraktor, hingga manufaktur, saya terbiasa menyesuaikan alur kerja dengan kebutuhan industri yang berbeda. Saat ini saya juga mulai merancang sistem kerja internal yang mendukung penyederhanaan alur input hingga pelaporan, sekaligus meningkatkan efektivitas, kontrol, dan akurasi informasi keuangan.
+       </div>
+       <img alt="Portrait of a focused accountant working on financial reports with charts and data on computer screens in a modern office" class="mt-2 w-full max-w-full h-auto rounded-md" height="400" id="tentangSayaImage" src="https://i.imgur.com/ca4sTPq.png" style="display: block" width="600"/>
+      </section>
+     </div>
+     <div id="rightColumn" class="space-y-6 w-full md:w-1/3 pl-6">
+      <section class="mb-6 hover:bg-[#ffffff0a] transition duration-300 rounded-lg p-2 w-full">
+       <h2 aria-controls="pendidikanText pendidikanImage" aria-expanded="false" class="text-[#5DE0D0] font-extrabold text-xs mb-1 border-b-2 border-[#5DE0D0] pb-1 cursor-pointer select-none" onclick="toggleBoth('pendidikanText', 'pendidikanImage', this)" onkeydown="if(event.key==='Enter' || event.key===' ') toggleBoth('pendidikanText', 'pendidikanImage', this)" tabindex="0">
+        + 🎓 PENDIDIKAN
+       </h2>
+       <div id="pendidikanText" style="display: none" tabindex="0" class="text-white leading-tight">
         SMKN 11 JAKARTA
         <br/>
-        West Jakarta
-        <br/>
-        2021
-       </p>
-       <span class="text-[#8DBF4A] text-[8px] font-semibold">
-        Vocational High School Diploma
-       </span>
-       <ul class="custom-bullet mt-3 space-y-1 text-white">
-        <li>
-         Solid understanding of fundamental accounting principles
-        </li>
-        <li>
-         Familiar with tax regulations and compliance
-        </li>
-        <li>
-         Proficient in institutional accounting and financial management
-        </li>
-        <li>
-         Experienced in using computer-based accounting systems
-        </li>
-       </ul>
-      </div>
-      <img alt="Illustration representing Pendidikan section with icons and documents" class="mt-2 w-full rounded-md" height="400" id="pendidikanImage" loading="lazy" src="https://storage.googleapis.com/a1aa/image/530279c3-b01b-478e-16e7-707523c29162.jpg" style="display: none" width="600"/>
-     </section>
-     <section class="mb-6">
-      <h2 aria-controls="pengalamanKerjaText pengalamanKerjaImage" aria-expanded="false" class="text-[#8DBF4A] font-extrabold text-xs mb-1 border-b border-[#2A4B7C] pb-1 cursor-pointer select-none" onclick="toggleBoth('pengalamanKerjaText', 'pengalamanKerjaImage', this)" onkeydown="if(event.key==='Enter' || event.key===' ') toggleBoth('pengalamanKerjaText', 'pengalamanKerjaImage', this)" tabindex="0">
-       + 💼 WORK EXPERIENCE
-      </h2>
-      <div id="pengalamanKerjaText" style="display: none" tabindex="0">
-       <p class="text-white mb-1">
+        📍 Jakarta Barat • 🗓 Lulus 2021 • 🎓 Ijazah SMK
+        <ul class="custom-bullet mt-3 space-y-1 text-white">
+         <li>Memahami prinsip dasar akuntansi</li>
+         <li>Mengenal sistem perpajakan</li>
+         <li>Mengetahui akuntansi lembaga &amp; manajemen keuangan</li>
+         <li>Menguasai Accurate, Myob, Excel</li>
+         <li>Sertifikasi Kompetensi BNSP Akuntansi (Jul 2021 – Jul 2024)</li>
+        </ul>
+       </div>
+       <img alt="Illustration representing Pendidikan section with icons and documents" class="mt-2 w-full rounded-md" height="400" id="pendidikanImage" loading="lazy" src="https://storage.googleapis.com/a1aa/image/530279c3-b01b-478e-16e7-707523c29162.jpg" style="display: none" width="600"/>
+      </section>
+      <section class="mb-6 hover:bg-[#ffffff0a] transition duration-300 rounded-lg p-2 w-full">
+       <h2 aria-controls="pengalamanKerjaText pengalamanKerjaImage" aria-expanded="false" class="text-[#5DE0D0] font-extrabold text-xs mb-1 border-b-2 border-[#5DE0D0] pb-1 cursor-pointer select-none" onclick="toggleBoth('pengalamanKerjaText', 'pengalamanKerjaImage', this)" onkeydown="if(event.key==='Enter' || event.key===' ') toggleBoth('pengalamanKerjaText', 'pengalamanKerjaImage', this)" tabindex="0">
+        + 💼 PENGALAMAN KERJA
+       </h2>
+       <div id="pengalamanKerjaText" style="display: none" tabindex="0" class="text-white mb-1 text-xs leading-tight">
         PT TIGA MUSTIKA KONSULTAN
         <br/>
-        JAKARTA
+        📍 Jakarta • Jan 2022 – Sekarang • Staff Accounting &amp; Tax
+        <ul class="custom-bullet pl-4 space-y-1 text-white">
+         <li>Menangani ±20 entitas klien dari berbagai sektor</li>
+         <li>Pencatatan harian, jurnal, dan penyesuaian (depresiasi, koreksi fiskal)</li>
+         <li>Rekonsiliasi kas, bank, piutang, hutang, dan akun pajak</li>
+         <li>Koordinasi dengan tim pajak dan supervisor untuk laporan keuangan</li>
+         <li>Menyusun laporan keuangan lengkap dan rekap transaksi</li>
+         <li>Membuat laporan aset, kartu stok, dan arsip audit</li>
+         <li>Analisis Laba Rugi berdasarkan margin, HPP, dan rasio</li>
+         <li>Persiapan data dan laporan pendukung PPh 29</li>
+        </ul>
+       </div>
+       <img alt="Illustration representing Pengalaman Kerja section with office and documents" class="mt-2 w-full rounded-md" height="400" id="pengalamanKerjaImage" loading="lazy" src="https://storage.googleapis.com/a1aa/image/76697854-b878-41fb-bc7b-2468de722c81.jpg" style="display: none" width="600"/>
+      </section>
+      <section class="mb-6 hover:bg-[#ffffff0a] transition duration-300 rounded-lg p-2 w-full">
+       <h2 aria-controls="keahlianText keahlianImage" aria-expanded="false" class="text-[#5DE0D0] font-extrabold text-xs mb-1 border-b-2 border-[#5DE0D0] pb-1 cursor-pointer select-none" onclick="toggleBoth('keahlianText', 'keahlianImage', this)" onkeydown="if(event.key==='Enter' || event.key===' ') toggleBoth('keahlianText', 'keahlianImage', this)" tabindex="0">
+        + 🧠 KOMPETENSI PROFESIONAL
+       </h2>
+       <div id="keahlianText" style="display: none" tabindex="0">
+        <ul class="custom-bullet space-y-1 text-white text-xs">
+         <li>
+          <strong>Akuntansi &amp; Pelaporan</strong>
+          <ul class="list-disc list-inside ml-4 space-y-1">
+           <li>Siklus penuh: pencatatan ➜ penyesuaian ➜ tutup buku</li>
+           <li>Rekonsiliasi kas, bank, AR/AP, pajak</li>
+           <li>Neraca, Laba/Rugi, Arus Kas siap audit</li>
+           <li>Konsistensi akun &amp; laporan antar entitas</li>
+          </ul>
+         </li>
+         <li>
+          <strong>Keuangan &amp; Analisis</strong>
+          <ul class="list-disc list-inside ml-4 space-y-1">
+           <li>Analisis margin, HPP, rasio biaya</li>
+           <li>Variance &amp; trend analysis</li>
+           <li>Proyeksi arus kas &amp; pelacakan anggaran</li>
+          </ul>
+         </li>
+         <li>
+          <strong>Perpajakan</strong>
+          <ul class="list-disc list-inside ml-4 space-y-1">
+           <li>Hitung &amp; susun SPT PPh 29</li>
+           <li>Klasifikasi biaya fiskal</li>
+           <li>Rekap PPN/PPh masa untuk kontrol</li>
+          </ul>
+         </li>
+         <li>
+          <strong>Soft Skills</strong>
+          <ul class="list-disc list-inside ml-4 space-y-1">
+           <li>Validasi &amp; arsip bukti transaksi</li>
+           <li>Format rekap standar</li>
+           <li>Komunikasi laporan ke klien/manajemen</li>
+          </ul>
+         </li>
+        </ul>
+       </div>
+       <img alt="Illustration of financial data charts, reports, and accounting documents representing Keahlian section" class="mt-2 w-full rounded-md" height="400" id="keahlianImage" loading="lazy" src="https://storage.googleapis.com/a1aa/image/730cc841-169c-4190-daae-510055f80694.jpg" style="display: none" width="600"/>
+      </section>
+      <section class="mb-6 hover:bg-[#ffffff0a] transition duration-300 rounded-lg p-2 w-full">
+       <h2 aria-controls="projectText projectImage" aria-expanded="false" class="text-[#5DE0D0] font-extrabold text-xs mb-1 border-b-2 border-[#5DE0D0] pb-1 cursor-pointer select-none" onclick="toggleBoth('projectText', 'projectImage', this)" onkeydown="if(event.key==='Enter' || event.key===' ') toggleBoth('projectText', 'projectImage', this)" tabindex="0">
+        + 📂 PROYEK &amp; PENCAPAIAN
+       </h2>
+       <div id="projectText" style="display: none" tabindex="0">
+        <ul class="custom-bullet space-y-1 text-white text-xs">
+         <li>Finalisasi laporan &amp; klasifikasi PPh 29</li>
+         <li>Analisis margin, HPP, rasio ➜ efisiensi</li>
+         <li>Kontrol pajak masa vs jurnal</li>
+         <li>Format rekap transaksi lintas klien</li>
+         <li>Dokumentasi siap audit</li>
+         <li>Automasi rekap via Excel &amp; Python dasar</li>
+        </ul>
+       </div>
+       <img alt="Illustration representing Project section with automation and PDF to Excel icons" class="mt-2 w-full rounded-md" height="400" id="projectImage" loading="lazy" src="https://storage.googleapis.com/a1aa/image/b441e94b-6f21-4540-fc07-595b90ac4159.jpg" style="display: none" width="600"/>
+      </section>
+      <section class="mb-6 hover:bg-[#ffffff0a] transition duration-300 rounded-lg p-2 w-full">
+       <h2 aria-controls="keahlianLainText keahlianLainImage" aria-expanded="false" class="text-[#5DE0D0] font-extrabold text-xs mb-1 border-b-2 border-[#5DE0D0] pb-1 cursor-pointer select-none" onclick="toggleBoth('keahlianLainText', 'keahlianLainImage', this)" onkeydown="if(event.key==='Enter' || event.key===' ') toggleBoth('keahlianLainText', 'keahlianLainImage', this)" tabindex="0">
+        + 🧩 KETERAMPILAN &amp; TOOLS
+       </h2>
+       <div id="keahlianLainText" style="display: none" tabindex="0">
+        <ul class="custom-bullet space-y-1 text-white text-xs">
+         <li>Excel (LOOKUP, SUMIF, INDEX/MATCH, PIVOT, validasi, VBA dasar)</li>
+         <li>Accurate &amp; Myob</li>
+         <li>Python: parsing, rekap, GUI PyQt5, pandas/openpyxl</li>
+         <li>Word, Google Sheets, PDF rapi</li>
+         <li>Manajemen file &amp; dokumen siap audit</li>
+        </ul>
+       </div>
+       <img alt="Illustration representing Keahlian Lain section with automation and Excel icons" class="mt-2 w-full rounded-md" height="400" id="keahlianLainImage" loading="lazy" src="https://storage.googleapis.com/a1aa/image/43f77ff9-5b02-4abf-e623-dbc39ba61194.jpg" style="display: none" width="600"/>
+      </section>
+     </div>
+    </div>
+   </div>
+  </div>
+  <!-- English content -->
+  <div class="hidden" id="lang-en">
+   <div aria-label="Ade Saputra Profile English" id="content" class="max-w-[1400px] mx-auto px-6" role="main">
+    <div class="flex flex-col md:flex-row justify-between items-center md:items-start">
+     <div>
+      <h1 class="text-[#64ffda] font-extrabold text-3xl leading-tight select-none">
+       ADE
+       <br/>
+       SAPUTRA
+      </h1>
+      <p class="text-[#5DE0D0] font-semibold text-xs mt-1 max-w-[320px] leading-tight select-none">
+       Specialist in Accounting, Financial Report, Tax
+       <br/>
+       &amp; Automation System
+      </p>
+     </div>
+     <div class="text-right text-xs font-mono text-secondary space-y-1 mt-4 md:mt-0 select-text">
+      <p>
+       JLN TANAH SEREAL XVI RT05/RW10
+       <i aria-hidden="true" class="fas fa-home ml-1">
+       </i>
+      </p>
+      <p>
+       JAKARTA BARAT, 11210
+      </p>
+      <p>
+       +6285158662423
+       <i aria-hidden="true" class="fas fa-phone ml-1">
+       </i>
+      </p>
+      <p>
+       IFKSPTR@GMAIL.COM 📧
+      </p>
+     </div>
+    </div>
+    <div class="mt-4 mb-6">
+     <div class="border-t border-[#64ffda]">
+     </div>
+     <div class="border-t border-[#64ffda] mt-1">
+     </div>
+    </div>
+    <div id="container" class="flex flex-col md:flex-row gap-6">
+     <div id="leftColumn" class="space-y-6 w-full md:w-2/3 pr-6">
+      <section class="mb-6 hover:bg-[#ffffff0a] transition duration-300 rounded-lg p-2 w-full open-section">
+       <h2 aria-controls="tentangSayaText tentangSayaImage" aria-expanded="true" class="text-[#5DE0D0] font-bold text-sm mb-2 border-b border-[#5DE0D0] pb-1 cursor-pointer select-none" onclick="toggleBoth('tentangSayaText', 'tentangSayaImage', this)" onkeydown="if(event.key==='Enter' || event.key===' ') toggleBoth('tentangSayaText', 'tentangSayaImage', this)" tabindex="0">
+        − 👤 ABOUT ME
+       </h2>
+       <div id="tentangSayaText" style="display: block" tabindex="0" class="text-white text-base leading-relaxed">
+        I am a professional in accounting, finance, and taxation with experience in preparing complete financial reports for both management and fiscal purposes. I focus on efficiency, precision, and structured reporting to ensure clarity and audit-readiness. Having worked with various entities across F&amp;B, trading, services, logistics, contracting, and manufacturing sectors, I am used to adapting workflows to diverse industry requirements. I have also begun designing internal workflows to help simplify the input-to-reporting process while enhancing accuracy, control, and financial clarity.
+       </div>
+       <img alt="Portrait of a focused accountant working on financial reports with charts and data on computer screens in a modern office" class="mt-2 w-full max-w-full h-auto rounded-md" height="400" id="tentangSayaImage" src="https://i.imgur.com/ca4sTPq.png" style="display: block" width="600"/>
+      </section>
+     </div>
+     <div id="rightColumn" class="space-y-6 w-full md:w-1/3 pl-6">
+      <section class="mb-6 hover:bg-[#ffffff0a] transition duration-300 rounded-lg p-2 w-full">
+       <h2 aria-controls="pendidikanText pendidikanImage" aria-expanded="false" class="text-[#5DE0D0] font-extrabold text-xs mb-1 border-b-2 border-[#5DE0D0] pb-1 cursor-pointer select-none" onclick="toggleBoth('pendidikanText', 'pendidikanImage', this)" onkeydown="if(event.key==='Enter' || event.key===' ') toggleBoth('pendidikanText', 'pendidikanImage', this)" tabindex="0">
+        + 🎓 EDUCATION
+       </h2>
+       <div id="pendidikanText" style="display: none" tabindex="0" class="text-white leading-tight">
+        SMKN 11 JAKARTA
         <br/>
-        Jan 2022 - Present
-       </p>
-       <span class="text-[#8DBF4A] text-[8px] font-semibold block mb-2">
-        Staff Accounting Tax
-       </span>
-       <ul class="custom-bullet pl-4 space-y-1 text-[8px] text-white">
-        <li>
-         Recorded and adjusted business transactions including costs, sales, and purchases.
-        </li>
-        <li>
-         Utilized accounting software (Accurate, Excel) to streamline reporting workflows.
-        </li>
-        <li>
-         Prepared detailed purchase and sales reports to support monthly closings.
-        </li>
-        <li>
-         Reconciled bank accounts, AR, AP, and tax balances accurately.
-        </li>
-        <li>
-         Produced comprehensive financial statements (balance sheet & P/L) for internal and tax use.
-        </li>
-        <li>
-         Created cash flow statements and conducted variance analysis.
-        </li>
-        <li>
-         Handling tax calculations (PPh 21, 23, 25, final tax, corporate tax).
-        </li>
-        <li>
-         Performing variance analysis and giving cost-efficiency recommendations.
-        </li>
-        <li>
-         Conducted inventory stock opname and aligned reports with financial data.
-        </li>
-	<li>
-         Experienced in handling ±20 companies across diverse industries, including F&B, services, leasing, trading, manufacturing, and construction — each with unique financial structures and reporting requirements.
-        </li>
-       </ul>
-      </div>
-      <img alt="Illustration representing Pengalaman Kerja section with office and documents" class="mt-2 w-full rounded-md" height="400" id="pengalamanKerjaImage" loading="lazy" src="https://storage.googleapis.com/a1aa/image/76697854-b878-41fb-bc7b-2468de722c81.jpg" style="display: none" width="600"/>
-     </section>
-     <section class="mb-6">
-      <h2 aria-controls="keahlianText keahlianImage" aria-expanded="false" class="text-[#8DBF4A] font-extrabold text-xs mb-1 border-b border-[#2A4B7C] pb-1 cursor-pointer select-none" onclick="toggleBoth('keahlianText', 'keahlianImage', this)" onkeydown="if(event.key==='Enter' || event.key===' ') toggleBoth('keahlianText', 'keahlianImage', this)" tabindex="0">
-       + 🧠 SKILLS
-      </h2>
-      <div id="keahlianText" style="display: none" tabindex="0">
-       <ul class="custom-bullet space-y-1 text-white">
-        <li>
-         <strong>
-          Accounting
-         </strong>
-         <br/>
-         Managed and recorded all financial transactions in a structured and standardized manner.
-         <ul class="list-disc list-inside ml-4 space-y-1">
-          <li>
-           Journal entries
-          </li>
-          <li>
-           Create and manage cash &amp; bank books
-          </li>
-          <li>
-           Inventory in-out records
-          </li>
-          <li>
-           Reconciliation (cash, bank, tax)
-          </li>
-         </ul>
-        </li>
-        <li>
-         <strong>
-          Financial Report
-         </strong>
-         <br/>
-         Creating accurate and insightful financial reports for decision-making.
-         <ul class="list-disc list-inside ml-4 space-y-1">
-          <li>
-           Balance sheet, Profit &amp; Loss, Cash Flow
-          </li>
-          <li>
-           Sales and Purchase Details
-          </li>
-          <li class="whitespace-nowrap">
-           Account Receivable / Account Payable (AR/AP Management)
-          </li>
-          <li>
-           Stock Reports
-          </li>
-          <li>
-           Asset Lists
-          </li>
-         </ul>
-        </li>
-        <li>
-         <strong>
-          Tax
-         </strong>
-         <br/>
-         <span class="block mb-1">
-          Ensured timely and compliant handling of tax.
-         </span>
-         <ul class="list-disc list-inside ml-4 space-y-1">
-          <li>
-           Tax Planning
-          </li>
-          <li>
-           Periodic Taxes (PPh 21, VAT, Unification)
-          </li>
-          <li>
-           Annual Corporate Tax (Final / PPh 25/29)
-          </li>
-         </ul>
-        </li>
-       </ul>
-      </div>
-      <img alt="Illustration of financial data charts, reports, and accounting documents representing Keahlian section" class="mt-2 w-full rounded-md" height="400" id="keahlianImage" loading="lazy" src="https://storage.googleapis.com/a1aa/image/730cc841-169c-4190-daae-510055f80694.jpg" style="display: none" width="600"/>
-     </section>
-     <section class="mb-6">
-      <h2 aria-controls="projectText projectImage" aria-expanded="false" class="text-[#8DBF4A] font-extrabold text-xs mb-1 border-b border-[#2A4B7C] pb-1 cursor-pointer select-none" onclick="toggleBoth('projectText', 'projectImage', this)" onkeydown="if(event.key==='Enter' || event.key===' ') toggleBoth('projectText', 'projectImage', this)" tabindex="0">
-       + 🛠️ PROJECTS
-      </h2>
-      <div id="projectText" style="display: none" tabindex="0">
-       <ul class="custom-bullet space-y-1 text-white">
-        <li>
-         Developed Python-based bots to automate data entry from Excel into Accurate 4 Desktop, covering:
-         <ul class="list-disc list-inside ml-6 space-y-1">
-          <li>
-           Journal Voucher
-          </li>
-          <li>
-           Sales Invoice
-          </li>
-          <li>
-           Purchase Invoice
-          </li>
-          <li>
-           Payment Cash/Bank
-          </li>
-         </ul>
-         This significantly accelerated data entry and reduced administrative workload.
-        </li>
-        <li>
-         Created intelligent PDF-to-Excel converters for:
-         <ul class="list-disc list-inside ml-6 space-y-1">
-          <li>
-           E-Statement Converter (Bank Statements – BCA PDF to Excel)
-          </li>
-          <li>
-           Coretax Withholding Documents (Coretax PDF to Excel)
-          </li>
-          <li>
-           utomated Withholding download bots from Coretax
-          </li>
-         </ul>
-         Boosted data processing speed and improved financial report reconciliation accuracy.
-        </li>
-       </ul>
-      </div>
-      <img alt="Illustration representing Project section with automation and PDF to Excel icons" class="mt-2 w-full rounded-md" height="400" id="projectImage" loading="lazy" src="https://storage.googleapis.com/a1aa/image/b441e94b-6f21-4540-fc07-595b90ac4159.jpg" style="display: none" width="600"/>
-     </section>
-     <section class="mb-6">
-      <h2 aria-controls="keahlianLainText keahlianLainImage" aria-expanded="false" class="text-[#8DBF4A] font-extrabold text-xs mb-1 border-b border-[#2A4B7C] pb-1 cursor-pointer select-none" onclick="toggleBoth('keahlianLainText', 'keahlianLainImage', this)" onkeydown="if(event.key==='Enter' || event.key===' ') toggleBoth('keahlianLainText', 'keahlianLainImage', this)" tabindex="0">
-       + ⚙️ OTHER SKILLS
-      </h2>
-      <div id="keahlianLainText" style="display: none" tabindex="0">
-       <ul class="custom-bullet space-y-1 text-white">
-        <li>
-         <strong>
-          Automation &amp; Bot System
-         </strong>
-         <br/>
-         Designed and implemented custom automation bots using Python and Excel to streamline recurring transactions in Accurate Desktop.
-        </li>
-        <li>
-         <strong>
-          PDF to Excel Template Converter
-         </strong>
-         <br/>
-         Built tailored document converters that convert PDF transaction files into structured Excel templates, ready for import or analysis.
-        </li>
-        <li>
-          <strong>Problem Solving</strong><br/>
-          Skilled at identifying root causes in financial reporting issues, data inconsistencies, or system errors, and providing practical, effective solutions for immediate implementation.
-        </li>
-        <li>
-          <strong>Financial Data Analysis</strong><br/>
-          Capable of filtering and analyzing data from various sources (Journal Entries, Financial Reports, Tax Records, Transaction Documents, etc.) to generate accurate reports and actionable insights.
-        </li>
-        <li>
-          <strong>Multi-Industry Adaptability</strong><br/>
-          Experienced in supporting clients across multiple industries such as F&B, services, leasing, trading, manufacturing, and construction — each with distinct reporting and compliance needs.
-        </li>
-       </ul>
-      </div>
-      <img alt="Illustration representing Keahlian Lain section with automation and Excel icons" class="mt-2 w-full rounded-md" height="400" id="keahlianLainImage" loading="lazy" src="https://storage.googleapis.com/a1aa/image/43f77ff9-5b02-4abf-e623-dbc39ba61194.jpg" style="display: none" width="600"/>
-     </section>
+        📍 West Jakarta • 🗓 Graduated 2021 • 🎓 Vocational Diploma
+        <ul class="custom-bullet mt-3 space-y-1 text-white">
+         <li>Solid foundation in accounting principles</li>
+         <li>Familiar with Indonesian tax system</li>
+         <li>Knowledgeable in institutional accounting &amp; financial management</li>
+         <li>Skilled in Accurate, Myob, Excel</li>
+         <li>BNSP Accounting Certification (Jul 2021 – Jul 2024)</li>
+        </ul>
+       </div>
+       <img alt="Illustration representing Pendidikan section with icons and documents" class="mt-2 w-full rounded-md" height="400" id="pendidikanImage" loading="lazy" src="https://storage.googleapis.com/a1aa/image/530279c3-b01b-478e-16e7-707523c29162.jpg" style="display: none" width="600"/>
+      </section>
+      <section class="mb-6 hover:bg-[#ffffff0a] transition duration-300 rounded-lg p-2 w-full">
+       <h2 aria-controls="pengalamanKerjaText pengalamanKerjaImage" aria-expanded="false" class="text-[#5DE0D0] font-extrabold text-xs mb-1 border-b-2 border-[#5DE0D0] pb-1 cursor-pointer select-none" onclick="toggleBoth('pengalamanKerjaText', 'pengalamanKerjaImage', this)" onkeydown="if(event.key==='Enter' || event.key===' ') toggleBoth('pengalamanKerjaText', 'pengalamanKerjaImage', this)" tabindex="0">
+        + 💼 WORK EXPERIENCE
+       </h2>
+       <div id="pengalamanKerjaText" style="display: none" tabindex="0" class="text-white mb-1 text-xs leading-tight">
+        PT TIGA MUSTIKA KONSULTAN
+        <br/>
+        📍 Jakarta • Jan 2022 – Present • Accounting &amp; Tax Staff
+        <ul class="custom-bullet pl-4 space-y-1 text-white">
+         <li>Handled ±20 client entities from various sectors</li>
+         <li>Recorded transactions, journals, and adjustments (depreciation, fiscal)</li>
+         <li>Reconciled cash, bank, AR, AP, and tax accounts</li>
+         <li>Coordinated with tax team and supervisor for financial reporting</li>
+         <li>Prepared full financial reports and transaction recaps</li>
+         <li>Maintained fixed asset reports, stock cards, and audit archives</li>
+         <li>Analyzed Profit &amp; Loss by margin, COGS, and ratio</li>
+         <li>Prepared data and supporting documents for PPh 29</li>
+        </ul>
+       </div>
+       <img alt="Illustration representing Pengalaman Kerja section with office and documents" class="mt-2 w-full rounded-md" height="400" id="pengalamanKerjaImage" loading="lazy" src="https://storage.googleapis.com/a1aa/image/76697854-b878-41fb-bc7b-2468de722c81.jpg" style="display: none" width="600"/>
+      </section>
+      <section class="mb-6 hover:bg-[#ffffff0a] transition duration-300 rounded-lg p-2 w-full">
+       <h2 aria-controls="keahlianText keahlianImage" aria-expanded="false" class="text-[#5DE0D0] font-extrabold text-xs mb-1 border-b-2 border-[#5DE0D0] pb-1 cursor-pointer select-none" onclick="toggleBoth('keahlianText', 'keahlianImage', this)" onkeydown="if(event.key==='Enter' || event.key===' ') toggleBoth('keahlianText', 'keahlianImage', this)" tabindex="0">
+        + 🧠 PROFESSIONAL COMPETENCIES
+       </h2>
+       <div id="keahlianText" style="display: none" tabindex="0">
+        <ul class="custom-bullet space-y-1 text-white text-xs">
+         <li>
+          <strong>Accounting &amp; Reporting</strong>
+          <ul class="list-disc list-inside ml-4 space-y-1">
+           <li>Full cycle: recording ➜ adjustment ➜ closing</li>
+           <li>Reconciliation of cash, bank, AR/AP, taxes</li>
+           <li>Audit-ready Balance Sheet, P&amp;L, and Cash Flow</li>
+           <li>Consistent account/report structure across entities</li>
+          </ul>
+         </li>
+         <li>
+          <strong>Finance &amp; Analysis</strong>
+          <ul class="list-disc list-inside ml-4 space-y-1">
+           <li>Margin, COGS, and expense ratio analysis</li>
+           <li>Variance and trend analysis</li>
+           <li>Cash flow projection and budget tracking</li>
+          </ul>
+         </li>
+         <li>
+          <strong>Taxation</strong>
+          <ul class="list-disc list-inside ml-4 space-y-1">
+           <li>Prepare &amp; file PPh 29</li>
+           <li>Fiscal vs non-fiscal classification</li>
+           <li>Monthly VAT/Income Tax recaps for control</li>
+          </ul>
+         </li>
+         <li>
+          <strong>Soft Skills</strong>
+          <ul class="list-disc list-inside ml-4 space-y-1">
+           <li>Validate &amp; archive supporting docs</li>
+           <li>Standard recap templates</li>
+           <li>Report communication to clients/management</li>
+          </ul>
+         </li>
+        </ul>
+       </div>
+       <img alt="Illustration of financial data charts, reports, and accounting documents representing Keahlian section" class="mt-2 w-full rounded-md" height="400" id="keahlianImage" loading="lazy" src="https://storage.googleapis.com/a1aa/image/730cc841-169c-4190-daae-510055f80694.jpg" style="display: none" width="600"/>
+      </section>
+      <section class="mb-6 hover:bg-[#ffffff0a] transition duration-300 rounded-lg p-2 w-full">
+       <h2 aria-controls="projectText projectImage" aria-expanded="false" class="text-[#5DE0D0] font-extrabold text-xs mb-1 border-b-2 border-[#5DE0D0] pb-1 cursor-pointer select-none" onclick="toggleBoth('projectText', 'projectImage', this)" onkeydown="if(event.key==='Enter' || event.key===' ') toggleBoth('projectText', 'projectImage', this)" tabindex="0">
+        + 📂 PROJECTS &amp; ACHIEVEMENTS
+       </h2>
+       <div id="projectText" style="display: none" tabindex="0">
+        <ul class="custom-bullet space-y-1 text-white text-xs">
+         <li>Finalized reports &amp; PPh 29 classification</li>
+         <li>Margin, COGS, ratio analysis ➜ efficiency</li>
+         <li>Reconciled tax vs journal data</li>
+         <li>Standardized cross-client report formats</li>
+         <li>Audit-ready documentation</li>
+         <li>Recap automation using Excel &amp; basic Python</li>
+        </ul>
+       </div>
+       <img alt="Illustration representing Project section with automation and PDF to Excel icons" class="mt-2 w-full rounded-md" height="400" id="projectImage" loading="lazy" src="https://storage.googleapis.com/a1aa/image/b441e94b-6f21-4540-fc07-595b90ac4159.jpg" style="display: none" width="600"/>
+      </section>
+      <section class="mb-6 hover:bg-[#ffffff0a] transition duration-300 rounded-lg p-2 w-full">
+       <h2 aria-controls="keahlianLainText keahlianLainImage" aria-expanded="false" class="text-[#5DE0D0] font-extrabold text-xs mb-1 border-b-2 border-[#5DE0D0] pb-1 cursor-pointer select-none" onclick="toggleBoth('keahlianLainText', 'keahlianLainImage', this)" onkeydown="if(event.key==='Enter' || event.key===' ') toggleBoth('keahlianLainText', 'keahlianLainImage', this)" tabindex="0">
+        + 🧩 SKILLS &amp; TOOLS
+       </h2>
+       <div id="keahlianLainText" style="display: none" tabindex="0">
+        <ul class="custom-bullet space-y-1 text-white text-xs">
+         <li>Excel (LOOKUP, SUMIF, INDEX/MATCH, PIVOT, validasi, VBA dasar)</li>
+         <li>Accurate &amp; Myob</li>
+         <li>Python: parsing, rekap, PyQt5 GUI, pandas/openpyxl</li>
+         <li>Word, Google Sheets, PDF rapi</li>
+         <li>Manajemen file &amp; dokumen siap audit</li>
+        </ul>
+       </div>
+       <img alt="Illustration representing Keahlian Lain section with automation and Excel icons" class="mt-2 w-full rounded-md" height="400" id="keahlianLainImage" loading="lazy" src="https://storage.googleapis.com/a1aa/image/43f77ff9-5b02-4abf-e623-dbc39ba61194.jpg" style="display: none" width="600"/>
+      </section>
+     </div>
     </div>
    </div>
   </div>

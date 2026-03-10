@@ -245,6 +245,7 @@
             text-shadow: 0 0 4px rgba(0,0,0,0.4);
             color: white;
         }
+	
 
         #expertise-carousel-buttons .carousel-item.active {
             filter: none;
@@ -282,31 +283,36 @@
         }
 
         #expertise-carousel-buttons .carousel-item.pos1 {
-            top: 60px;
+            top: 70px;
             transform: scale(1) translateZ(0);
             z-index: 10;
         }
 
         #expertise-carousel-buttons .carousel-item.pos2 {
-            top: 120px;
+            top: 140px;
             transform: scale(0.9) translateZ(-50px);
             z-index: 5;
         }
 
         /* Right content panel */
         #carousel-content-expertise {
-            flex: 1;
-            background: white;
-            border-radius: 1rem;
-            padding: 2rem;
-            box-shadow: 0 4px 30px rgb(0 0 0 / 0.05);
-            min-height: 180px;
-            display: flex;
-            flex-direction: column;
-            justify-content: center;
-            position: relative;
-            overflow: hidden;
-        }
+    flex: 1;
+    background: white;
+    border-radius: 1rem;
+    padding: 2rem;
+    box-shadow: 0 4px 30px rgb(0 0 0 / 0.05);
+
+    height: 620px;          /* tinggi tetap */
+    min-height: 420px;
+    max-height: 720px;
+
+    display: flex;
+    flex-direction: column;
+    justify-content: flex-start;
+
+    position: relative;
+    overflow-y: auto;       /* kalau teks panjang bisa scroll */
+}
 
         /* Icon circle on top left of content */
         #carousel-content-expertise .icon-circle {
@@ -467,7 +473,7 @@
                 </div>
                 <!-- Contact Me button -->
                 <!-- Updated: Added data-i18n-aria-label -->
-                <a class="bg-gradient-to-r from-blue-600 to-blue-500 text-white text-sm font-medium rounded-lg px-4 py-3 w-full text-center hover:from-blue-700 hover:to-blue-600 transition-all shadow-md hover:shadow-lg transform hover:-translate-y-1 mb-4" href="mailto:ifkspr@gmail.com" aria-label="Contact me via email" data-i18n="home.contact_me" data-i18n-aria-label="home.contact_me_aria">
+                <a class="bg-gradient-to-r from-blue-600 to-blue-500 text-white text-sm font-medium rounded-lg px-4 py-3 w-full text-center hover:from-blue-700 hover:to-blue-600 transition-all shadow-md hover:shadow-lg transform hover:-translate-y-1 mb-4" href="mailto:adesaputra.accflow@gmail.com" aria-label="Contact me via email" data-i18n="home.contact_me" data-i18n-aria-label="home.contact_me_aria">
                     CONTACT ME
                 </a>
                 <!-- Vertical Carousel Buttons -->
@@ -489,7 +495,7 @@
                 </h1>
                 <p class="text-gray-700 font-medium text-base mb-4 max-w-[600px] select-text">
                     Accounting Specialist | Tax Compliance | Financial Analyst<br>
-                    Jakarta Barat • 0878-8837-0395 • ifkspr@gmail.com
+                    Jakarta Barat • 0878-8837-0395 • adesaputra.accflow@gmail.com
                 </p>
 
                 <div id="content-container" class="relative max-w-[600px] w-full">
@@ -519,20 +525,20 @@
                         </h4>
                         <ul class="text-sm md:text-base leading-relaxed list-disc list-inside space-y-1 select-text">
                             <li data-i18n="home.work_experience_item1">
-                                <span class="id-content">Berpengalaman menangani ±20 perusahaan dari berbagai bidang seperti F&B, jasa, sewa, dagang, manufaktur, dan konstruksi</span>
-                                <span class="en-content hidden">Experienced in handling ±20 companies from various sectors such as F&B, services, rental, trading, manufacturing, and construction</span>
+                                <span class="id-content">Berpengalaman menangani ±20 perusahaan dari berbagai bidang</span>
+                                <span class="en-content hidden">Experienced in handling ±20 companies from various sectors</span>
                             </li>
                             <li data-i18n="home.work_experience_item2">
-                                <span class="id-content">Mengelola transaksi harian, jurnal umum, serta jurnal penyesuaian: penyusutan, depresiasi, dan koreksi fiskal</span>
-                                <span class="en-content hidden">Managed daily transactions, general journals, and adjustment entries: amortization, depreciation, and fiscal corrections</span>
+                                <span class="id-content">Mengelola transaksi serta jurnal penyesuaian dan koreksi fiskal</span>
+                                <span class="en-content hidden">Managed daily transactions, adjustment, and fiscal corrections</span>
                             </li>
                             <li data-i18n="home.work_experience_item3">
-                                <span class="id-content">Melakukan rekonsiliasi kas, bank, piutang, hutang, dan akun pajak masa</span>
-                                <span class="en-content hidden">Performed reconciliation of cash, bank, accounts receivable, accounts payable, and monthly tax accounts</span>
+                                <span class="id-content">Melakukan rekonsiliasi</span>
+                                <span class="en-content hidden">Performed reconciliation</span>
                             </li>
                             <li data-i18n="home.work_experience_item4">
-                                <span class="id-content">Menyusun laporan keuangan lengkap: Neraca, Laba Rugi, dan Arus Kas</span>
-                                <span class="en-content hidden">Prepared complete financial statements: Balance Sheet, Income Statement, and Cash Flow</span>
+                                <span class="id-content">Menyusun laporan keuangan lengkap</span>
+                                <span class="en-content hidden">Prepared complete financial statements</span>
                             </li>
                         </ul>
 
@@ -547,8 +553,8 @@
                         </div>
                         <h3 class="text-[#0f1c44] font-bold text-lg mt-4" data-i18n="home.education_heading"></h3>
                         <h4 class="font-semibold text-gray-800 text-sm md:text-base mb-1">
-                            <span class="id-content">SMKN 11 Jakarta — Ijazah SMK Akuntansi<br>Lulus 2021</span>
-                            <span class="en-content hidden">SMKN 11 Jakarta — Vocational High School Diploma in Accounting<br>Graduated 2021</span>
+                            <span class="id-content">SMKN 11 JAKARTA — Akreditasi A<br> Jurusan Akuntansi Keuangan Dan Lembaga<br>Lulus 2021</span>
+                            <span class="en-content hidden">SMKN 11 JAKARTA — Accredited A<br> Vocational High School Diploma in Accounting<br>Graduated 2021</span>
                         </h4>
                         <ul class="text-sm md:text-base leading-relaxed list-disc list-inside space-y-1 select-text">
                             <li data-i18n="home.education_item1_details1">
@@ -556,8 +562,14 @@
                                 <span class="en-content hidden">BNSP Competency Certification (Jul 2021 – Jul 2024)</span>
                             </li>
                             <li data-i18n="home.education_item1_details2">
-                                <span class="id-content">Pemahaman dasar akuntansi, perpajakan, akuntansi untuk lembaga dan manajemen</span>
-                                <span class="en-content hidden">Foundational understanding of accounting, taxation, institutional accounting, and management</span>
+                                <span class="id-content">Pemahaman dasar akuntansi</span>
+				<span class="en-content hidden">Foundational understanding of accounting</span>
+<li data-i18n="home.education_item1_details3"><span class="id-content">Perpajakan</span>
+<span class="en-content hidden">Taxation</span>
+<li data-i18n="home.education_item1_details4"><span class="id-content">Akuntansi untuk lembaga dan manajemen</span>
+<span class="en-content hidden">Institutional accounting and management
+</span>
+                                
                             </li>
                         </ul>
 
@@ -573,24 +585,46 @@
                         <h3 class="text-[#0f1c44] font-bold text-lg mt-4" data-i18n="home.core_competencies_heading"></h3>
                         <ul class="text-sm md:text-base leading-relaxed list-disc list-inside space-y-1 select-text">
                             <li data-i18n="home.core_competencies_item1">
-                                <span class="id-content">Pengolahan dan kontrol data keuangan dan perpajakan</span>
-                                <span class="en-content hidden">Processing and control of financial and tax data</span>
+                                <span class="id-content">Spesialis Akuntansi<br>
+                                <span style="padding-left:22px;">+ Penguasaan Perangkat Lunak Akuntansi & Manajemen Sistem</span><br>
+                                <span style="padding-left:22px;">+ Optimalisasi Proses Akuntansi</span><br>
+                                <span style="padding-left:22px;">+ Rekonsiliasi Data Keuangan & Manajemen Audit Trail</span><br>
+                                <span style="padding-left:22px;">+ Kontrol Internal & Validasi Dokumen Pendukung</span><br>
+                                <span style="padding-left:22px;">+ Penyusunan Laporan Keuangan</span>
+                                </span>
+                                <span class="en-content hidden">Accounting Specialist<br>
+                                <span style="padding-left:22px;">+ Accounting Software Proficiency & Systems Management</span><br>
+                                <span style="padding-left:22px;">+ Accounting Process Optimization</span><br>
+                                <span style="padding-left:22px;">+ Financial Data Reconciliation & Audit Trail Management</span><br>
+                                <span style="padding-left:22px;">+ Internal Controls & Supporting Document Validation</span><br>
+                                <span style="padding-left:22px;">+ Financial Reporting</span>
+                                </span>
                             </li>
+
                             <li data-i18n="home.core_competencies_item2">
-                                <span class="id-content">Pembuatan laporan keuangan (Neraca, Laba Rugi, Arus Kas, AR/AP, Pembelian, Penjualan, Persediaan, Aset)</span>
-                                <span class="en-content hidden">Preparation of financial statements (Balance Sheet, Income Statement, Cash Flow, AR/AP, Purchases, Sales, Inventory, Assets)</span>
+                                <span class="id-content">Kepatuhan Pajak<br>
+                                <span style="padding-left:22px;">+ Pemahaman Pajak</span><br>
+                                <span style="padding-left:22px;">+ Perencanaan Pajak & Kepatuhan Regulasi</span><br>
+                                <span style="padding-left:22px;">+ Rekonsiliasi Data Pajak & Kesesuaian Pelaporan Pajak</span>
+                                </span>
+                                <span class="en-content hidden">Tax Compliance<br>
+                                <span style="padding-left:22px;">+ Tax Knowledge</span><br>
+                                <span style="padding-left:22px;">+ Tax Planning & Regulatory Compliance</span><br>
+                                <span style="padding-left:22px;">+ Tax Data Reconciliation & Tax Filing Consistency</span>
+                                </span>
                             </li>
+
                             <li data-i18n="home.core_competencies_item3">
-                                <span class="id-content">Analisis Data Keuangan: Menyaring data dari berbagai sumber (jurnal, transaksi, laporan pajak) menjadi laporan akurat</span>
-                                <span class="en-content hidden">Financial Data Analysis: Filtering data from various sources (journals, transactions, tax reports) into accurate reports</span>
-                            </li>
-                            <li data-i18n="home.core_competencies_item4">
-                                <span class="id-content">Perencanaan Pajak (Tax Planning)</span>
-                                <span class="en-content hidden">Tax Planning</span>
-                            </li>
-                            <li data-i18n="home.core_competencies_item5">
-                                <span class="id-content">Rekonsiliasi kas, bank, dan pajak</span>
-                                <span class="en-content hidden">Cash, bank, and tax reconciliation</span>
+                                <span class="id-content">Analis Keuangan<br>
+                                <span style="padding-left:22px;">+ Analisis Data Keuangan & Manajemen Keuangan</span><br>
+                                <span style="padding-left:22px;">+ Pelaporan & Evaluasi Keuangan</span><br>
+                                <span style="padding-left:22px;">+ Dukungan Pengambilan Keputusan & Wawasan Strategis</span>
+                                </span>
+                                <span class="en-content hidden">Financial Analyst<br>
+                                <span style="padding-left:22px;">+ Financial Data Analysis & Financial Management</span><br>
+                                <span style="padding-left:22px;">+ Financial Reporting & Performance Evaluation</span><br>
+                                <span style="padding-left:22px;">+ Decision Support & Strategic Insights</span>
+                                </span>
                             </li>
                         </ul>
                         <a href="#expertise" class="mt-4 inline-block text-sm text-blue-600 font-medium hover:underline transition-all" data-i18n="home.see_more">
@@ -605,17 +639,39 @@
                         <h3 class="text-[#0f1c44] font-bold text-lg mt-4" data-i18n="home.tools_skills_heading"></h3>
                         <ul class="text-sm md:text-base leading-relaxed list-disc list-inside space-y-1 select-text">
                             <li data-i18n="home.tools_skills_item1">
-                                <span class="id-content">Word & PDF Editor<br>Penyusunan dokumen laporan, memo internal, dan dokumentasi audit</span>
-                                <span class="en-content hidden">Word & PDF Editor<br>Preparation of report documents, internal memos, and audit documentation</span>
+                                <span class="id-content">Perangkat Lunak<br>
+                                <span style="padding-left:22px;">+ Accurate Desktop</span><br>
+                                <span style="padding-left:22px;">+ Microsoft Excel</span><br>
+                                <span style="padding-left:22px;">+ Web Coretax</span><br>
+                                <span style="padding-left:22px;">+ Python</span>
+                                </span>
+
+                                <span class="en-content hidden">Software Tools<br>
+                                <span style="padding-left:22px;">+ Accurate Desktop</span><br>
+                                <span style="padding-left:22px;">+ Microsoft Excel</span><br>
+                                <span style="padding-left:22px;">+ Web Coretax</span><br>
+                                <span style="padding-left:22px;">+ Python</span>
+                                </span>
+
                             </li>
+                            <li data-i18n="
                             <li data-i18n="home.tools_skills_item2">
-                                <span class="id-content">Python (Dasar)<br>Otomatisasi rekap data dan parsing transaksi untuk keperluan akuntansi; membuat antarmuka sederhana (GUI) dan alat pembuat invoice untuk efisiensi kerja</span>
-                                <span class="en-content hidden">Python (Basic)<br>Automation of data recap and transaction parsing for accounting purposes; creating simple interfaces (GUI) and invoice generation tools for work efficiency</span>
-                            </li>
-                            <li data-i18n="home.tools_skills_item3">
-                                <span class="id-content">Audit Trail File Management<br>Pengelolaan arsip dokumen, struktur folder, dan pelacakan revisi untuk audit</span>
-                                <span class="en-content hidden">Audit Trail File Management<br>Management of document archives, folder structure, and revision tracking for audits</span>
-                            </li>
+                                <span class="id-content">Keterampilan Teknis<br>
+                                <span style="padding-left:22px;">+ Akuntansi & Pelaporan Keuangan Profesional</span><br>
+                                <span style="padding-left:22px;">+ Kepatuhan & Perencanaan Pajak Strategis</span><br>
+                                <span style="padding-left:22px;">+ Kemahiran Excel & Analisis Data Keuangan</span><br>
+                                <span style="padding-left:22px;">+ Audit Trail & Manajemen Berkas</span><br>
+                                <span style="padding-left:22px;">+ Otomasi & Pengembangan Alat Pendukung</span><br>	
+                                </span>
+
+                                <span class="en-content hidden">Technical Skills<br>
+                                <span style="padding-left:22px;">+ Professional Accounting & Financial Reporting</span><br>
+                                <span style="padding-left:22px;">+ Strategic Tax Compliance & Planning</span><br>
+                                <span style="padding-left:22px;">+ Excel Proficiency & Financial Data Analysis</span><br>
+                                <span style="padding-left:22px;">+ Audit Trail & File Management</span><br>	
+                                <span style="padding-left:22px;">+ Automation & Support Tools Development</span><br>
+                                </span>
+                            
                         </ul>
                         <a href="#expertise" class="mt-4 inline-block text-sm text-blue-600 font-medium hover:underline transition-all" data-i18n="home.see_more">
                             Lihat selengkapnya →
@@ -740,36 +796,22 @@
             <div id="expertise-carousel" aria-label="Expertise carousel with navigation buttons on left and content on right" role="region">
                 <!-- Left vertical carousel buttons -->
                 <div id="expertise-carousel-buttons" role="listbox" tabindex="0" aria-label="Expertise categories">
-                    <button class="carousel-item pos1 active" role="option" aria-selected="true" tabindex="0" data-index="0" id="btn-accounting" type="button" aria-controls="carousel-content-expertise" aria-describedby="desc-accounting" data-i18n="expertise.accounting">
-                        Accounting & Reporting
+                    <button class="carousel-item pos1 active" role="option" aria-selected="true" tabindex="0" data-index="0" id="btn-accounting" type="button" aria-                                                                                                                                                                                                                                                                    	                controls="carousel-content-expertise" aria-describedby="desc-accounting" data-i18n="expertise.accounting">
+                        Accounting Specialist
                     </button>
-                    <button class="carousel-item pos2 blur" role="option" aria-selected="false" tabindex="-1" data-index="1" id="btn-tax" type="button" aria-controls="carousel-content-expertise" aria-describedby="desc-tax" data-i18n="expertise.tax">
+                    <button class="carousel-item pos2 blur" role="option" aria-selected="false" tabindex="-1" data-index="1" id="btn-tax" type="button" aria-	                	                controls="carousel-content-expertise" aria-describedby="desc-tax" data-i18n="expertise.tax">
                         Tax Compliance
                     </button>
-                    <button class="carousel-item pos0 blur" role="option" aria-selected="false" tabindex="-1" data-index="2" id="btn-financial-analysis" type="button" aria-controls="carousel-content-expertise" aria-describedby="desc-financial-analysis" data-i18n="expertise.analysis">
+                    <button class="carousel-item pos0 blur" role="option" aria-selected="false" tabindex="-1" data-index="2" id="btn-financial-analysis" type="button" 	                aria-controls="carousel-content-expertise" aria-describedby="desc-financial-analysis" data-i18n="expertise.analysis">
                         Financial Analysis
                     </button>
-                    <button class="carousel-item" style="display:none;" role="option" aria-selected="false" tabindex="-1" data-index="3" id="btn-process-optimization" type="button" aria-controls="carousel-content-expertise" aria-describedby="desc-process-optimization" data-i18n="expertise.process">
-                        Process Optimization
+                    <button class="carousel-item" style="display:none;" role="option" aria-selected="false" tabindex="-1" data-index="3" id="btn-process-optimization" 	                type="button" aria-controls="carousel-content-expertise" aria-describedby="desc-process-optimization" data-i18n="expertise.process">
+                        Software Tools
                     </button>
-                    <button class="carousel-item" style="display:none;" role="option" aria-selected="false" tabindex="-1" data-index="4" id="btn-excel" type="button" aria-controls="carousel-content-expertise" aria-describedby="desc-excel" data-i18n="expertise.excel_software">
-                        Excel
+                    <button class="carousel-item" style="display:none;" role="option" aria-selected="false" tabindex="-1" data-index="4" id="btn-excel" type="button" 	                aria-controls="carousel-content-expertise" aria-describedby="desc-excel" data-i18n="expertise.excel_software">
+                        Skills & Competencies
                     </button>
-                    <button class="carousel-item" style="display:none;" role="option" aria-selected="false" tabindex="-1" data-index="5" id="btn-accurate" type="button" aria-controls="carousel-content-expertise" aria-describedby="desc-accurate" data-i18n="expertise.accurate_software">
-                        Accurate
-                    </button>
-                    <button class="carousel-item" style="display:none;" role="option" aria-selected="false" tabindex="-1" data-index="6" id="btn-myob" type="button" aria-controls="carousel-content-expertise" aria-describedby="desc-myob" data-i18n="expertise.myob_software">
-                        Myob
-                    </button>
-                    <button class="carousel-item" style="display:none;" role="option" aria-selected="false" tabindex="-1" data-index="7" id="btn-python" type="button" aria-controls="carousel-content-expertise" aria-describedby="desc-python" data-i18n="expertise.python_software">
-                        Python
-                    </button>
-                    <button class="carousel-item" style="display:none;" role="option" aria-selected="false" tabindex="-1" data-index="8" id="btn-word-pdf" type="button" aria-controls="carousel-content-expertise" aria-describedby="desc-word-pdf" data-i18n="expertise.word_software">
-                        Word & PDF Editor
-                    </button>
-                    <button class="carousel-item" style="display:none;" role="option" aria-selected="false" tabindex="-1" data-index="9" id="btn-audit-trail" type="button" aria-controls="carousel-content-expertise" aria-describedby="desc-audit-trail" data-i18n="expertise.audit_software">
-                        Audit Trail File Management
-                    </button>
+                    
                 </div>
 
                 <!-- Right content panel -->
@@ -779,8 +821,8 @@
                     </div>
                     <h3 id="content-title-expertise">Accounting & Reporting</h3>
                     <p id="content-desc-expertise" class="leading-relaxed">
-                        <span class="id-content">Proses akuntansi lengkap: pencatatan, penyesuaian, depresiasi, hingga tutup buku.</span>
-                        <span class="en-content hidden">Full accounting cycle: recording, adjustments, depreciation, and book closing.</span>
+                        <span class="id-content">Proses akuntansi lengkap</span>
+                        <span class="en-content hidden">Full accounting cycle.</span>
                     </p>
                 </div>
             </div>
@@ -995,7 +1037,7 @@
                             </div>
                             <div>
                                 <h4 class="font-bold text-gray-800 mb-1" data-i18n="contact.email_info_label">Email</h4>
-                                <p class="text-gray-600" data-i18n="contact.email_info_value">ifkspr@gmail.com</p>
+                                <p class="text-gray-600" data-i18n="contact.email_info_value">adesaputra.accflow@gmail.com</p>
                             </div>
                         </div>
                         <div class="flex items-start">
@@ -1071,27 +1113,13 @@
                 "about.more": "View Expertise",
                 "expertise.title": "Professional Expertise",
                 "expertise.subtitle": "Comprehensive accounting and financial management capabilities developed through diverse industry experience",
-                "expertise.accounting": "Accounting & Reporting",
-                "expertise.accounting_desc": "Full accounting cycle: recording, adjustments, depreciation, and book closing.",
+                "expertise.accounting": "Accounting Specialist",
                 "expertise.tax": "Tax Compliance",
-                "expertise.tax_desc": "Corporate tax calculation, control, and reconciliation of monthly taxes. Fiscal classification for reports and tax liability estimation.",
                 "expertise.analysis": "Financial Analysis",
-                "expertise.analysis_desc": "Analysis of margins, COGS, expense ratios, and basic cash flow estimation.",
-                "expertise.process": "Process Optimization",
-                "expertise.process_desc": "Development of internal systems for report presentation and data validation. Mentoring contract and intern staff through the full accounting cycle.",
-                "expertise.software": "Technical Proficiency",
-                "expertise.excel_software": "Excel",
-                "expertise.excel_level": "VLOOKUP, XLOOKUP, IF, SUMIFS, INDEX-MATCH, data validation (drop-down, error check)",
-                "expertise.accurate_software": "Accurate",
-                "expertise.accurate_level": "Transaction recording, journal adjustments, multi-entity financial reports",
-                "expertise.myob_software": "Myob",
-                "expertise.myob_level": "Transaction recording, journal adjustments, multi-entity financial reports",
-                "expertise.python_software": "Python",
-                "expertise.python_level": "Data recap automation and transaction parsing for accounting purposes; creating simple interfaces (GUI) and invoice generation tools for work efficiency",
-                "expertise.word_software": "Word & PDF Editor",
-                "expertise.word_level": "Report document preparation, internal memos, and audit documentation",
-                "expertise.audit_software": "Audit Trail File Management",
-                "expertise.audit_level": "Document archive management, folder structure, and revision tracking for audits",
+                "expertise.process": "Software Tools",
+                "expertise.excel_software": "Skills & Competence",
+            
+                
                 "experience.title": "Professional Experience",
                 "experience.subtitle": "My career journey and the valuable experience gained across multiple industries",
                 "experience.position1": "Staff Accounting & Tax",
@@ -1115,7 +1143,7 @@
                 "contact.location_label": "Location",
                 "contact.location_value": "Jakarta Barat, Indonesia",
                 "contact.email_info_label": "Email",
-                "contact.email_info_value": "ifkspr@gmail.com",
+                "contact.email_info_value": "adesaputra.accflow@gmail.com",
                 "contact.phone_label": "Phone",
                 "contact.phone_value": "0878-8837-0395",
                 "footer.copyright": "© 2023 Ade Saputra. All rights reserved.",
@@ -1160,27 +1188,14 @@
                 "about.more": "Lihat Keahlian",
                 "expertise.title": "Keahlian Profesional",
                 "expertise.subtitle": "Kemampuan akuntansi dan manajemen keuangan komprehensif yang dikembangkan melalui pengalaman industri yang beragam",
-                "expertise.accounting": "Akuntansi & Pelaporan",
-                "expertise.accounting_desc": "Proses akuntansi lengkap: pencatatan, penyesuaian, depresiasi, hingga tutup buku.",
+                "expertise.accounting": "Spesialis Akuntansi",
                 "expertise.tax": "Kepatuhan Pajak",
-                "expertise.tax_desc": "Perhitungan pajak badan serta kontrol dan rekonsiliasi pajak masa. Klasifikasi fiskal untuk laporan dan estimasi kewajiban pajak.",
                 "expertise.analysis": "Analisis Keuangan",
-                "expertise.analysis_desc": "Analisis margin, HPP, rasio biaya, dan estimasi arus kas sederhana.",
-                "expertise.process": "Optimasi Proses",
-                "expertise.process_desc": "Pengembangan sistem internal penyajian laporan dan validasi data. Pembimbingan staf kontrak/magang dalam siklus akuntansi penuh.",
-                "expertise.software": "Kemahiran Teknis",
-                "expertise.excel_software": "Excel",
-                "expertise.excel_level": "VLOOKUP, XLOOKUP, IF, SUMIFS, INDEX-MATCH, validasi data (drop-down, error check)",
-                "expertise.accurate_software": "Accurate",
-                "expertise.accurate_level": "Pencatatan transaksi, jurnal penyesuaian, laporan keuangan multi-entitas",
-                "expertise.myob_software": "Myob",
-                "expertise.myob_level": "Pencatatan transaksi, jurnal penyesuaian, laporan keuangan multi-entitas",
-                "expertise.python_software": "Python",
-                "expertise.python_level": "Otomatisasi rekap data dan parsing transaksi untuk keperluan akuntansi; membuat antarmuka sederhana (GUI) dan alat pembuat invoice untuk efisiensi kerja",
-                "expertise.word_software": "Word & PDF Editor",
-                "expertise.word_level": "Penyusunan dokumen laporan, memo internal, dan dokumentasi audit",
-                "expertise.audit_software": "Audit Trail File Management",
-                "expertise.audit_level": "Pengelolaan arsip dokumen, struktur folder, dan pelacakan revisi untuk audit",
+                "expertise.software": "Perangkat Lunak",
+                "expertise.Skill": "Keterampilan & Kompetensi",
+		"expertise.process": "Perangkat Lunak",
+                "expertise.excel_software": "Keterampilan & Kompetensi",
+                
                 "experience.title": "Pengalaman Profesional",
                 "experience.subtitle": "Perjalanan karir saya dan pengalaman berharga yang diperoleh di berbagai industri",
                 "experience.position1": "Staf Akuntansi & Pajak",
@@ -1204,7 +1219,7 @@
                 "contact.location_label": "Lokasi",
                 "contact.location_value": "Jakarta Barat, Indonesia",
                 "contact.email_info_label": "Email",
-                "contact.email_info_value": "ifkspr@gmail.com",
+                "contact.email_info_value": "adesaputra.accflow@gmail.com",
                 "contact.phone_label": "Telepon",
                 "contact.phone_value": "0878-8837-0395",
                 "footer.copyright": "© 2023 Ade Saputra. Hak cipta dilindungi.",
@@ -1570,67 +1585,208 @@
         const expertiseIconContainer = document.getElementById('icon-container-expertise');
 
         const expertiseData = [
-            {
-                title: { en: "Accounting & Reporting", id: "Akuntansi & Pelaporan" },
-                description: { en: "Full accounting cycle: recording, adjustments, depreciation, and book closing.", id: "Proses akuntansi lengkap: pencatatan, penyesuaian, depresiasi, hingga tutup buku." },
-                iconClass: "fas fa-file-invoice-dollar",
-                iconColor: "#2563eb"
-            },
-            {
-                title: { en: "Tax Compliance", id: "Kepatuhan Pajak" },
-                description: { en: "Corporate tax calculation, control, and reconciliation of monthly taxes. Fiscal classification for reports and tax liability estimation.", id: "Perhitungan pajak badan serta kontrol dan rekonsiliasi pajak masa. Klasifikasi fiskal untuk laporan dan estimasi kewajiban pajak." },
-                iconClass: "fas fa-file-invoice",
-                iconColor: "#2563eb"
-            },
-            {
-                title: { en: "Financial Analysis", id: "Analisis Keuangan" },
-                description: { en: "Analysis of margins, COGS, expense ratios, and basic cash flow estimation.", id: "Analisis margin, HPP, rasio biaya, dan estimasi arus kas sederhana." },
-                iconClass: "fas fa-chart-line",
-                iconColor: "#2563eb"
-            },
-            {
-                title: { en: "Process Optimization", id: "Optimasi Proses" },
-                description: { en: "Development of internal systems for report presentation and data validation. Mentoring contract and intern staff through the full accounting cycle.", id: "Pengembangan sistem internal penyajian laporan dan validasi data. Pembimbingan staf kontrak/magang dalam siklus akuntansi penuh." },
-                iconClass: "fas fa-tasks",
-                iconColor: "#2563eb"
-            },
-            {
-                title: { en: "Excel", id: "Excel" },
-                description: { en: "VLOOKUP, XLOOKUP, IF, SUMIFS, INDEX-MATCH, data validation (drop-down, error check)", id: "VLOOKUP, XLOOKUP, IF, SUMIFS, INDEX-MATCH, validasi data (drop-down, error check)" },
-                iconClass: "fas fa-file-excel",
-                iconColor: "#2563eb"
-            },
-            {
-                title: { en: "Accurate", id: "Accurate" },
-                description: { en: "Transaction recording, journal adjustments, multi-entity financial reports", id: "Pencatatan transaksi, jurnal penyesuaian, laporan keuangan multi-entitas" },
-                iconClass: "fas fa-calculator",
-                iconColor: "#2563eb"
-            },
-            {
-                title: { en: "Myob", id: "Myob" },
-                description: { en: "Transaction recording, journal adjustments, multi-entity financial reports", id: "Pencatatan transaksi, jurnal penyesuaian, laporan keuangan multi-entitas" },
-                iconClass: "fas fa-book",
-                iconColor: "#2563eb"
-            },
-            {
-                title: { en: "Python", id: "Python" },
-                description: { en: "Data recap automation and transaction parsing for accounting purposes; creating simple interfaces (GUI) and invoice generation tools for work efficiency", id: "Otomatisasi rekap data dan parsing transaksi untuk keperluan akuntansi; membuat antarmuka sederhana (GUI) dan alat pembuat invoice untuk efisiensi kerja" },
-                iconClass: "fab fa-python",
-                iconColor: "#2563eb"
-            },
-            {
-                title: { en: "Word & PDF Editor", id: "Word & PDF Editor" },
-                description: { en: "Report document preparation, internal memos, and audit documentation", id: "Penyusunan dokumen laporan, memo internal, dan dokumentasi audit" },
-                iconClass: "fas fa-file-word",
-                iconColor: "#2563eb"
-            },
-            {
-                title: { en: "Audit Trail File Management", id: "Audit Trail File Management" },
-                description: { en: "Document archive management, folder structure, and revision tracking for audits", id: "Pengelolaan arsip dokumen, struktur folder, dan pelacakan revisi untuk audit" },
-                iconClass: "fas fa-folder-open",
-                iconColor: "#2563eb"
-            }
-        ];
+
+{
+title: { en: "Accounting Specialist", id: "Spesialis Akuntansi" },
+description: {
+en: `
++ Accounting Software Proficiency & Systems Management
+    Experienced in utilizing accounting software such as Accurate for transaction entries, ledger postings, and financial reporting, helping maintain accurate financial records and consistent accounting data.
+
++ Accounting Process Optimization
+    Optimized accounting processes by designing more efficient workflows and reducing repetitive manual tasks through automation, improving the speed and accuracy of transaction recording while supporting more effective team workload management.
+
++ Financial Data Reconciliation & Audit Trail Management
+    Performing systematic financial data reconciliation to ensure consistency and alignment between accounting records, available financial data, and supporting documents, while maintaining clear audit trails so that every transaction can be properly traced and verified.
+
++ Internal Controls & Supporting Document Validation
+    Implementing internal control procedures in transaction recording by ensuring the completeness and validity of supporting documents, while providing supervision to maintain the quality of the recording process so that each transaction is accurately recorded and properly accountable.
+
++ Strategic Financial Reporting
+    Preparing strategic financial statements that are structured and accurate, providing relevant, auditable, and accountable financial information, while supporting management in making more informed and effective decisions.
+`,
+id: `
++ Penguasaan Perangkat Lunak Akuntansi & Manajemen Sistem
+    Berpengalaman dalam mengoperasikan sistem akuntansi seperti Accurate untuk penginputan transaksi, pencatatan buku besar, serta penyusunan laporan keuangan sehingga membantu menjaga akurasi pencatatan dan konsistensi data keuangan.
+
++ Optimalisasi Proses Akuntansi
+    Mengoptimalkan proses akuntansi dengan merancang alur kerja yang lebih efisien serta mengurangi pekerjaan manual berulang melalui penerapan otomatisasi, sehingga meningkatkan kecepatan dan akurasi pencatatan transaksi sekaligus mendukung pengelolaan beban kerja tim yang lebih efektif.
+
++ Rekonsiliasi Data Keuangan & Manajemen Audit Trail
+    Melakukan rekonsiliasi data keuangan secara sistematis untuk memastikan konsistensi dan keselarasan antara pencatatan akuntansi dengan data serta dokumen pendukung yang tersedia, sekaligus menjaga jejak audit yang jelas sehingga setiap transaksi dapat ditelusuri dan diverifikasi dengan baik.
+
++ Kontrol Internal & Validasi Dokumen Pendukung
+    Menerapkan prosedur pengendalian internal dalam proses pencatatan transaksi dengan memastikan kelengkapan dan kesesuaian dokumen pendukung, serta melakukan supervisi untuk menjaga kualitas proses pencatatan sehingga setiap transaksi tercatat secara akurat dan dapat dipertanggungjawabkan.
+
++ Penyusunan Laporan Keuangan Strategis
+    Menyusun laporan keuangan strategis yang terstruktur dan akurat, sehingga memberikan informasi keuangan yang relevan, auditable, dan dapat dipertanggungjawabkan, sekaligus membantu pengambilan keputusan manajemen yang lebih tepat dan efektif.
+`
+},
+iconClass: "fas fa-calculator",
+iconColor: "#2563eb"
+},
+
+{
+title: { en: "Tax Compliance", id: "Kepatuhan Pajak" },
+description: {
+en: `
++ Knowledge of Strategic Tax
+    Leveraging extensive experience in strategic taxation to understand tax types and transaction characteristics, enabling precise assessment of tax implications for business decisions.
+
++ Tax Planning & Regulatory Compliance
+    Classifying tax obligations based on identified transactions, designing and prioritizing compliance strategies, and ensuring that all tax plans are effectively implemented in line with regulations.
+
++ Tax Data Reconciliation & Tax Filing Consistency
+    Analyzing and verifying transactions with potential tax liabilities, ensuring that tax reporting aligns with transaction records and financial data, thereby minimizing penalties and comprehensively supporting corporate compliance.
+`,
+id: `
++ Perpajakan Strategis
+    Memanfaatkan pengalaman mendalam dalam perpajakan strategis untuk memahami jenis pajak dan karakteristik transaksi, sehingga mampu menilai implikasi pajak terhadap keputusan bisnis dengan tepat.
+
++ Perencanaan Pajak & Kepatuhan Regulasi
+    Mengklasifikasikan kewajiban pajak berdasarkan transaksi yang ada, menyusun prioritas dan strategi kepatuhan, serta memastikan semua rencana pajak dijalankan secara efektif dan sesuai regulasi.
+
++ Rekonsiliasi Data Pajak & Kesesuaian Pelaporan Pajak
+    Menganalisis dan memverifikasi transaksi dengan potensi kewajiban pajak, memastikan pelaporan pajak selaras dengan pencatatan transaksi dan data keuangan, sehingga meminimalkan risiko denda dan mendukung kepatuhan perusahaan secara menyeluruh.
+`
+},
+iconClass: "fas fa-file-invoice",
+iconColor: "#2563eb"
+},
+
+{
+title: { en: "Financial Analyst", id: "Analis Keuangan" },
+description: {
+en: `
++ Financial Data Analysis & Financial Management
+    Analyzing financial data comprehensively to generate actionable insights, while monitoring and managing company financial resources strategically, supporting operational efficiency and effective cost control.
+
++ Financial Reporting & Performance Evaluation
+    Preparing structured and accurate financial reports, providing information to assess business performance, and evaluating financial conditions to ensure resources are managed effectively.
+
++ Decision Support & Strategic Insights
+    Providing and leveraging analysis and evaluation outcomes to support management in making more strategic decisions, offering insights that highlight opportunities for efficiency, cost management, regulatory compliance, and overall business performance.
+`,
+id: `
++ Analisis Data Keuangan & Manajemen Keuangan
+    Menganalisis data keuangan secara menyeluruh untuk menghasilkan insight yang tepat, serta memantau dan mengelola sumber daya keuangan perusahaan secara strategis, mendukung efisiensi operasional dan pengendalian biaya secara optimal.
+
++ Pelaporan & Evaluasi Keuangan
+    Menyusun laporan keuangan aktual yang terstruktur dan akurat, menyediakan informasi yang dapat digunakan untuk menilai kinerja usaha, serta mengevaluasi kondisi keuangan untuk memastikan pengelolaan sumber daya berjalan efektif.
+
++ Dukungan Pengambilan Keputusan & Wawasan Strategis
+    Menyediakan dan memanfaatkan hasil analisis serta evaluasi untuk mendukung pengambilan keputusan manajemen secara lebih strategis, dengan pemahaman yang memperlihatkan peluang efisiensi, pengelolaan biaya, kepatuhan operasional, dan arah kinerja usaha secara keseluruhan.
+`
+},
+iconClass: "fas fa-chart-line",
+iconColor: "#2563eb"
+},
+
+{
+title: { en: "Software Tools", id: "Perangkat Lunak" },
+description: {
+en: `
++ Accurate Desktop
+    Experienced in operating Cash & Bank, Sales, Purchase, Inventory, and General Ledger modules for transaction recording and integrated financial data management, generating consistent data that supports reconciliation processes, maintains alignment between transaction records and tax compliance requirements, and enables the preparation of accurate financial statements.
+
++ Microsoft Excel
+    Experienced in utilizing Microsoft Excel for financial data processing and analysis by applying functions such as LOOKUP, SUMIFS, and other formula combinations to manage and reconcile transaction data. Also used to develop automated reporting templates including General Ledger, Trial Balance, Balance Sheet, and Profit & Loss statements that are interconnected, helping streamline data processing, maintain data consistency, and support more efficient financial analysis and reporting.
+
++ Web Coretax
+    Experienced in utilizing Web Coretax to extract tax invoice and withholding tax certificate data to verify the consistency between financial transaction records and tax reporting data, including sales, purchases, payroll, and expense transactions with tax withholding implications. This process helps ensure alignment between recorded and reported data while minimizing potential discrepancies in tax compliance.
+
++ Python
+    Leveraging and continuously learning Python to develop automation solutions for accounting data processing, such as extracting and automatically summarizing data from PDF documents into the required Excel templates instantly, enabling faster and more accurate transaction reviews and adjustments. Python is also used to build RPA solutions that assist repetitive transaction entries from Excel into accounting systems that do not provide Excel import features, such as Accurate Desktop. This approach helps save processing time, reduce manual work, ease the team’s workload, and improve efficiency in financial data processing and transaction recording.
+`,
+id: `
++ Accurate Desktop
+    Berpengalaman mengoperasikan modul Cash & Bank, Sales, Purchase, Inventory, dan General Ledger dalam pencatatan transaksi serta pengelolaan data keuangan secara terintegrasi, menghasilkan data yang konsisten untuk mendukung proses rekonsiliasi, menjaga keselarasan pencatatan transaksi dengan implikasi dan kepatuhan perpajakan, serta penyusunan laporan keuangan yang akurat.
+
++ Microsoft Excel
+    Berpengalaman menggunakan Microsoft Excel dalam pengolahan dan analisis data keuangan melalui pemanfaatan berbagai fungsi seperti LOOKUP, SUMIFS, serta kombinasi rumus lainnya untuk mengelola dan merekonsiliasi data transaksi. Digunakan pula dalam pengembangan template laporan otomatis seperti General Ledger, Trial Balance, Neraca, dan Laporan Laba Rugi yang saling terhubung, sehingga membantu mempercepat pengolahan data, menjaga konsistensi pencatatan, serta mendukung analisis dan penyusunan laporan keuangan secara lebih efisien.
+
++ Web Coretax
+    Berpengalaman menggunakan Web Coretax untuk penarikan data faktur pajak dan bukti potong dalam proses pengecekan kesesuaian antara pencatatan transaksi keuangan dengan data pelaporan perpajakan, termasuk transaksi penjualan, pembelian, penggajian, serta biaya yang memiliki implikasi pemotongan pajak. Proses ini membantu memastikan konsistensi antara data yang dicatat dan yang dilaporkan sekaligus meminimalkan potensi ketidaksesuaian dalam kepatuhan perpajakan.
+
++ Python
+    Memanfaatkan dan mempelajari Python untuk mengembangkan solusi otomasi dalam pengolahan data akuntansi, seperti mengekstrak dan merekap data dari PDF secara otomatis ke dalam template Excel yang dibutuhkan secara instan, sehingga memungkinkan proses pengecekan serta penyesuaian transaksi dilakukan dengan lebih cepat dan akurat. Python juga digunakan untuk membangun RPA yang membantu proses entri transaksi berulang dari Excel ke sistem akuntansi yang belum menyediakan fitur impor data dari Excel, seperti Accurate Desktop. Pendekatan ini membantu menghemat waktu proses, mengurangi pekerjaan manual, meringankan beban kerja tim, serta meningkatkan efisiensi dalam pengolahan dan pencatatan transaksi.
+`
+},
+iconClass: "fas fa-laptop-code",
+iconColor: "#2563eb"
+},
+
+{
+title: { en: "Skills & Competence", id: "Keterampilan & Kompetensi" },
+description: {
+en: `
++ Professional Accounting & Financial Reporting
+    Applying structured accounting principles in recording transactions, preparing journals, and producing reliable financial statements for operational and managerial purposes.
+
++ Strategic Tax Compliance & Planning
+    Understanding tax obligations and supporting tax planning activities to ensure that financial records align with applicable taxation regulations.
+
++ Excel Proficiency & Financial Data Analysis
+    Processing financial data using spreadsheet analysis techniques to evaluate business performance and identify financial trends.
+
++ Audit Trail & File Management
+    Organizing financial documents and maintaining clear audit trails to ensure every financial transaction can be traced and verified when needed.
+
++ Automation & Support Tools Development
+    Creating simple automation tools and supporting utilities to reduce repetitive work and improve efficiency in accounting processes.
+
++ Analytical Thinking & Problem Solving
+    Analyzing financial data and transaction patterns to identify inconsistencies, potential risks, and opportunities for improving financial processes.
+
++ Attention to Detail
+    Maintaining strong accuracy and careful verification in transaction recording, financial data review, and reconciliation processes.
+
++ Pemikiran Strategis & Efisiensi Inovatif
+    Taking a strategic approach to improving workflows and processes, seeking innovative and effective ways to manage financial data and accounting tasks while supporting team performance.
+
++ Leadership & Mentoring
+    Guiding and mentoring interns and contract staff in accounting processes, reviewing final reports, and facilitating team collaboration to maintain quality and consistency.
+
++ Collaboration & Communication
+    Working collaboratively with accounting and tax teams to ensure financial data, reporting processes, and compliance requirements are well aligned.
+`,
+id: `
++ Akuntansi Profesional & Pelaporan Keuangan
+    Menerapkan prinsip akuntansi secara sistematis dalam pencatatan transaksi, penyusunan jurnal, serta pembuatan laporan keuangan yang dapat diandalkan.
+
++ Kepatuhan & Perencanaan Pajak Strategis
+    Memahami kewajiban perpajakan serta membantu proses perencanaan pajak agar pencatatan keuangan tetap selaras dengan regulasi perpajakan.
+
++ Kemahiran Excel & Analisis Data Keuangan
+    Mengolah data keuangan menggunakan teknik analisis spreadsheet untuk mengevaluasi kinerja bisnis serta mengidentifikasi tren keuangan.
+
++ Audit Trail & Manajemen Berkas
+    Mengelola dokumen keuangan secara terstruktur dan menjaga jejak audit yang jelas agar setiap transaksi dapat ditelusuri kembali dengan mudah.
+
++ Otomasi & Pengembangan Alat Pendukung
+    Mengembangkan alat bantu sederhana dan proses otomatisasi untuk mengurangi pekerjaan berulang serta meningkatkan efisiensi pekerjaan akuntansi.
+
++ Pemikiran Analitis & Pemecahan Masalah
+    Menganalisis data keuangan serta pola transaksi untuk mengidentifikasi ketidaksesuaian, potensi risiko, maupun peluang perbaikan dalam proses keuangan.
+
++ Ketelitian & Perhatian terhadap Detail
+    Menjaga tingkat ketelitian tinggi dalam pencatatan transaksi, pengecekan data keuangan, serta proses rekonsiliasi agar informasi yang dihasilkan tetap akurat.
+
++ Pemikiran Strategis & Efisiensi Inovatif
+    Memiliki pendekatan strategis dalam meningkatkan alur kerja dan proses, mencari cara yang lebih efektif dan inovatif dalam pengelolaan data keuangan serta pekerjaan akuntansi, sekaligus mendukung kinerja tim.
+
++ Kepemimpinan & Mentoring
+    Membimbing staf magang dan kontrak dalam seluruh proses akuntansi, mereview laporan akhir, serta memfasilitasi kolaborasi tim untuk menjaga konsistensi dan kualitas kerja.
+
++ Kolaborasi & Komunikasi
+    Bekerja sama dengan tim akuntansi dan pajak untuk memastikan keselarasan data keuangan, proses pelaporan, serta pemenuhan kewajiban kepatuhan.
+`
+},
+iconClass: "fas fa-tools",
+iconColor: "#2563eb"
+}
+
+];
 
         let expertiseCurrentIndex = 0;
         let expertiseAutoRotateInterval = null;
